@@ -47,12 +47,6 @@ export default class ProseMirrorEditorDriver {
             schema: this.schema,
             plugins: this.buildPluginItems().toArray()
         };
-        // return {
-        //     doc: this.parseInitialValue(this.attrs.value, this.schema),
-        //     disabled: this.attrs.disabled,
-        //     schema: this.schema,
-        //     plugins: this.buildPluginItems().toArray(),
-        // };
     }
 
     buildPluginItems() {
