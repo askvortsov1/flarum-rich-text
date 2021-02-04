@@ -7,8 +7,8 @@ export default function placeholderPlugin(text) {
             decorations: (state) => {
                 const decorations = [];
 
-                const decorate = (node, pos) => {
-                    if (node.type.isBlock && node.childCount === 0 && pos === 0) {
+                const decorate = (node, pos, parent) => {
+                    if (node.type.isBlock && node.childCount === 0 && pos === 0 && parent.childCount === 1) {
                         decorations.push(
                             Decoration.node(pos, pos + node.nodeSize, {
                                 class: 'placeholder',
@@ -18,7 +18,7 @@ export default function placeholderPlugin(text) {
                     }
                 };
 
-                state.doc.descendants(decorate);
+                decorate(state.doc.child(0), 0, state.doc);
 
                 return DecorationSet.create(state.doc, decorations);
             },
