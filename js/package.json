@@ -17,8 +17,13 @@
     "prosemirror-markdown": "^1.0.0",
     "prosemirror-example-setup": "^1.0.0"
   },
+  "devDependencies": {
+    "prettier": "2.0.2"
+  },
   "scripts": {
     "dev": "webpack --mode development --watch",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "format": "prettier --write src",
+    "format-check": "prettier --check src"
   }
 }
