@@ -10,6 +10,7 @@ import { EditorState, TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { buildInputRules, buildKeymap } from 'prosemirror-example-setup';
 import { liftListItem, sinkListItem } from 'prosemirror-schema-list';
+import { dropCursor } from "prosemirror-dropcursor"
 
 import ItemList from 'flarum/common/utils/ItemList';
 import disabledPlugin from './disabledPlugin';
@@ -52,7 +53,6 @@ export default class ProseMirrorEditorDriver {
     buildPluginItems() {
         const items = new ItemList();
 
-
         items.add('markdownInputrules', buildInputRules(schema));
 
         items.add('markdownKeybinds', keymap(buildKeymap(schema)));
@@ -70,6 +70,8 @@ export default class ProseMirrorEditorDriver {
         items.add('historyKeymap', keymap({ 'Mod-z': undo, 'Mod-y': redo }));
 
         items.add('disabled', disabledPlugin());
+
+        items.add('dropCursor', dropCursor());
 
         return items;
     }
