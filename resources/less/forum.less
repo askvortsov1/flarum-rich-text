@@ -1,4 +1,5 @@
 .TextEditor .ProseMirror {
+    overflow-x: hidden;
     overflow-y: auto;
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -41,6 +42,10 @@
     h5:first-child,
     h6:first-child {
         margin-top: 0;
+    }
+
+    img {
+        max-width: 100%;
     }
 
     .placeholder::before {
