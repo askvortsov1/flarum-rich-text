@@ -14,7 +14,6 @@
     "prosemirror-state": "^1.0.0",
     "prosemirror-menu": "^1.0.0",
     "prosemirror-dropcursor": "^1.0.0",
-    "prosemirror-gapcursor": "^1.0.0",
     "prosemirror-markdown": "^1.0.0",
     "prosemirror-example-setup": "^1.0.0"
   },

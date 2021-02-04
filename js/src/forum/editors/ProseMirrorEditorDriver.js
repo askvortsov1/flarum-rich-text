@@ -10,7 +10,7 @@ import { EditorState, TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { buildInputRules, buildKeymap } from 'prosemirror-example-setup';
 import { liftListItem, sinkListItem } from 'prosemirror-schema-list';
-import { dropCursor } from "prosemirror-dropcursor"
+import { dropCursor } from "prosemirror-dropcursor";
 
 import ItemList from 'flarum/common/utils/ItemList';
 import disabledPlugin from './disabledPlugin';
