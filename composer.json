@@ -7,7 +7,8 @@
   "type": "flarum-extension",
   "license": "MIT",
   "require": {
-    "flarum/core": "^0.1.0-beta.8"
+    "flarum/core": "^0.1.0-beta.16",
+    "flarum/markdown": "^0.1.0-beta.16"
   },
   "authors": [
     {
@@ -24,14 +25,12 @@
   "extra": {
     "flarum-extension": {
       "title": "Rich Text",
+      "category": "formatting",
       "icon": {
-        "name": "",
-        "backgroundColor": "",
-        "color": ""
+        "name": "fas fa-pen",
+        "backgroundColor": "#00CED1",
+        "color": "#fff"
       }
-    },
-    "flagrow": {
-      "discuss": ""
     }
   }
 }
