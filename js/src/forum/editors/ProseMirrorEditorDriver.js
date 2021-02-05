@@ -12,6 +12,7 @@ import { dropCursor } from 'prosemirror-dropcursor';
 import ItemList from 'flarum/common/utils/ItemList';
 import disabledPlugin from './disabledPlugin';
 import placeholderPlugin from './placeholderPlugin';
+import menuPlugin from './menuPlugin';
 
 export default class ProseMirrorEditorDriver {
   constructor(target, attrs) {
@@ -19,7 +20,6 @@ export default class ProseMirrorEditorDriver {
   }
 
   build(target, attrs) {
-    console.log('fdsfsadf');
     this.attrs = attrs;
     this.schema = new Schema(this.buildSchemaConfig());
     this.state = EditorState.create(this.buildEditorStateConfig());
@@ -74,6 +74,8 @@ export default class ProseMirrorEditorDriver {
     items.add('disabled', disabledPlugin());
 
     items.add('dropCursor', dropCursor());
+
+    items.add('menu', menuPlugin(this.attrs.menuState));
 
     return items;
   }
