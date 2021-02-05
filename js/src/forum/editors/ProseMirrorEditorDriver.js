@@ -125,6 +125,17 @@ export default class ProseMirrorEditorDriver {
   }
 
   /**
+   * Get (at most) the last N characters from the current "text block".
+   */
+  getLastNChars(n) {
+    const lastNode = this.view.state.selection.$from.nodeBefore;
+
+    if (!lastNode) return "";
+
+    return lastNode.text.slice(Math.max(0, lastNode.text.length - n));
+  }
+
+  /**
    * Insert content into the textarea at the position of the cursor.
    *
    * @param {String} text
@@ -154,9 +165,7 @@ export default class ProseMirrorEditorDriver {
    * @param text
    */
   insertBetween(start, end, text) {
-    const nodes = defaultMarkdownParser.parse(text);
-
-    this.view.dispatch(this.view.state.tr.insert(start, nodes, end));
+    this.view.dispatch(this.view.state.tr.insertText(text, start, end));
 
     // Move the textarea cursor to the end of the content we just inserted.
     this.moveCursorTo(start + text.length);
@@ -187,8 +196,13 @@ export default class ProseMirrorEditorDriver {
     this.focus();
   }
 
-  getCaretCoordinates(position, options) {
-    return { left: 0, top: 0, height: 0 };
+  getCaretCoordinates(position) {
+    const viewportCoords = this.view.coordsAtPos(position);
+    const editorViewportOffset = this.view.dom.getBoundingClientRect();
+    return {
+      left: viewportCoords.left - editorViewportOffset.left,
+      top: viewportCoords.top - editorViewportOffset.top + this.view.dom.scrollTop,
+    };
   }
 
   focus() {
