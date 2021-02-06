@@ -166,6 +166,7 @@ export default class ProseMirrorEditorDriver {
    */
   insertBetween(start, end, text) {
     this.view.dispatch(this.view.state.tr.insertText(text, start, end));
+    $(this.view.dom).click();
 
     // Move the textarea cursor to the end of the content we just inserted.
     this.moveCursorTo(start + text.length);
