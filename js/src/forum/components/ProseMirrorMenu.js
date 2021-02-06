@@ -1,5 +1,4 @@
-import { wrapIn } from 'prosemirror-commands';
-import { wrapInList } from 'prosemirror-schema-list';
+import { wrapIn, wrapInList } from 'tiptap-commands';
 
 import Component from 'flarum/Component';
 import ItemList from 'flarum/utils/ItemList';

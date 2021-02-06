@@ -1,5 +1,5 @@
 import Dropdown from 'flarum/common/components/Dropdown';
-import { setBlockType } from 'prosemirror-commands';
+import { setBlockType } from 'tiptap-commands';
 
 export default class NodeTypeDropdown extends Dropdown {
   oninit(vnode) {

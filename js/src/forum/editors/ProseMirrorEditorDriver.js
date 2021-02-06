@@ -1,4 +1,4 @@
-import { baseKeymap } from 'prosemirror-commands';
+import { baseKeymap } from 'tiptap-commands';
 import { undo, redo, history } from 'prosemirror-history';
 import { keymap } from 'prosemirror-keymap';
 import { schema, defaultMarkdownParser, defaultMarkdownSerializer } from 'prosemirror-markdown';
@@ -6,7 +6,7 @@ import { Schema } from 'prosemirror-model';
 import { EditorState, TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { buildInputRules, buildKeymap } from 'prosemirror-example-setup';
-import { liftListItem, sinkListItem } from 'prosemirror-schema-list';
+import { liftListItem, sinkListItem } from 'tiptap-commands';
 import { dropCursor } from 'prosemirror-dropcursor';
 
 import ItemList from 'flarum/common/utils/ItemList';
