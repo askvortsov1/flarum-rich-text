@@ -1,4 +1,4 @@
-import { wrapIn, wrapInList } from 'tiptap-commands';
+import { wrapIn } from 'tiptap-commands';
 
 import Component from 'flarum/Component';
 import ItemList from 'flarum/utils/ItemList';
@@ -8,6 +8,7 @@ import MarkButton from './MarkButton';
 import NodeTypeDropdown from './NodeTypeDropdown';
 import InsertImageDropdown from './InsertImageDropdown';
 import InsertLinkDropdown from './InsertLinkDropdown';
+import ListButton from './ListButton';
 
 export default class ProseMirrorMenu extends Component {
   oninit(vnode) {
@@ -129,21 +130,21 @@ export default class ProseMirrorMenu extends Component {
 
     items.add(
       'unordered_list',
-      CommandButton.component({
+      ListButton.component({
         type: 'unordered_list',
         icon: 'fas fa-list-ul',
         state: state,
-        command: wrapInList(state.getSchema().nodes.bullet_list),
+        listType: state.getSchema().nodes.bullet_list,
       })
     );
 
     items.add(
       'ordered_list',
-      CommandButton.component({
+      ListButton.component({
         type: 'ordered_list',
         icon: 'fas fa-list-ol',
         state: state,
-        command: wrapInList(state.getSchema().nodes.ordered_list),
+        listType: state.getSchema().nodes.ordered_list,
       })
     );
 
