@@ -32,6 +32,12 @@ export default class MenuState {
     else return this.editorView.state.doc.rangeHasMark(from, to, markType);
   }
 
+  nodeActive(nodeType, attrs) {
+      let {$from, to, node} = this.editorView.state.selection;
+      if (node) return node.hasMarkup(nodeType, attrs);
+      return to <= $from.end() && $from.parent.hasMarkup(nodeType, attrs);
+  }
+
   run(key) {
     if (this.items[key]) {
       this.editorView.focus();

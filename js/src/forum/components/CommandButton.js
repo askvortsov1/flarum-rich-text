@@ -23,7 +23,7 @@ export default class CommandButton extends Component {
     );
   }
 
-  keydown(event) {
+  keydown(e) {
     if (e.key === ' ' || e.key === 'Enter') {
       this.click(e);
     }

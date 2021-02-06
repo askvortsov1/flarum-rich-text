@@ -1,11 +1,12 @@
-import { toggleMark, setBlockType, wrapIn } from 'prosemirror-commands';
+import { wrapIn } from 'prosemirror-commands';
+import { wrapInList } from 'prosemirror-schema-list';
 
 import Component from 'flarum/Component';
 import ItemList from 'flarum/utils/ItemList';
 
 import CommandButton from './CommandButton';
-import { wrapInList } from 'prosemirror-schema-list';
 import MarkButton from './MarkButton';
+import NodeTypeDropdown from './NodeTypeDropdown';
 
 export default class ProseMirrorMenu extends Component {
   oninit(vnode) {
@@ -22,12 +23,46 @@ export default class ProseMirrorMenu extends Component {
     const state = this.attrs.state;
 
     items.add(
-      'header',
-      CommandButton.component({
-        type: 'header',
-        icon: 'fas fa-heading',
+      'text_type',
+      NodeTypeDropdown.component({
+        type: 'text_type',
         state: state,
-        command: setBlockType(state.getSchema().nodes.heading, 3),
+        options: [
+          {
+            title: 'H1',
+            type: state.getSchema().nodes.heading,
+            attrs: { level: 1 }
+          },
+          {
+            title: 'H2',
+            type: state.getSchema().nodes.heading,
+            attrs: { level: 2 }
+          },
+          {
+            title: 'H3',
+            type: state.getSchema().nodes.heading,
+            attrs: { level: 3 }
+          },
+          {
+            title: 'H4',
+            type: state.getSchema().nodes.heading,
+            attrs: { level: 4 }
+          },
+          {
+            title: 'H5',
+            type: state.getSchema().nodes.heading,
+            attrs: { level: 5 }
+          },
+          {
+            title: 'H6',
+            type: state.getSchema().nodes.heading,
+            attrs: { level: 6 }
+          },
+          {
+            title: 'P',
+            type: state.getSchema().nodes.paragraph
+          }
+        ]
       })
     );
 
