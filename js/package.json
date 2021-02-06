@@ -15,7 +15,9 @@
     "prosemirror-menu": "^1.0.0",
     "prosemirror-dropcursor": "^1.0.0",
     "prosemirror-markdown": "^1.0.0",
-    "prosemirror-example-setup": "^1.0.0"
+    "prosemirror-example-setup": "^1.0.0",
+    "tiptap-commands": "^1.0.0",
+    "tiptap-utils": "^1.0.0"
   },
   "devDependencies": {
     "prettier": "2.0.2"

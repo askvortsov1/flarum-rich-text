@@ -1,4 +1,13 @@
 askvortsov-rich-text:
   forum:
     composer:
+      insert_button: Insert
+      insert_image:
+        src_placeholder: Link
+        title_placeholder: Title
+      insert_link:
+        text_placeholder: Text
+        href_placeholder: Link
+        title_placeholder: Title (shows on hover)
+      remove_button: Remove
       text_type_tooltip: Select Text Type

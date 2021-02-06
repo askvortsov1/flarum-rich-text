@@ -6,8 +6,8 @@ export default class NodeTypeDropdown extends Dropdown {
     super.oninit(vnode);
 
     this.state = this.attrs.state;
-    this.state.addItem(this.attrs.type, (state, dispatch, view) => {
-      return this.command(state, dispatch, view);
+    this.state.addItem(this.attrs.type, (state, dispatch) => {
+      return this.command(state, dispatch);
     }, this.onEditorUpdate.bind(this));
   }
 

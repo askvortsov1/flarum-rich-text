@@ -7,6 +7,8 @@ import ItemList from 'flarum/utils/ItemList';
 import CommandButton from './CommandButton';
 import MarkButton from './MarkButton';
 import NodeTypeDropdown from './NodeTypeDropdown';
+import InsertImageDropdown from './InsertImageDropdown';
+import InsertLinkDropdown from './InsertLinkDropdown';
 
 export default class ProseMirrorMenu extends Component {
   oninit(vnode) {
@@ -103,6 +105,26 @@ export default class ProseMirrorMenu extends Component {
         icon: 'fas fa-code',
         state: state,
         mark: state.getSchema().marks.code,
+      })
+    );
+
+    items.add(
+      'link',
+      InsertLinkDropdown.component({
+        type: 'link',
+        icon: 'fas fa-link',
+        state: state,
+        mark: state.getSchema().marks.link
+      })
+    );
+
+    items.add(
+      'image',
+      InsertImageDropdown.component({
+        type: 'image',
+        icon: 'fas fa-image',
+        state: state,
+        node: state.getSchema().nodes.image
       })
     );
 

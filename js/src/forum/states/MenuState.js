@@ -1,3 +1,5 @@
+import { getMarkAttrs, markIsActive, nodeIsActive } from 'tiptap-utils';
+
 export default class MenuState {
   constructor() {
     this.items = {};
@@ -27,15 +29,24 @@ export default class MenuState {
   }
 
   markActive(markType) {
-    let { from, $from, to, empty } = this.editorView.state.selection;
-    if (empty) return markType.isInSet(this.editorView.state.storedMarks || $from.marks());
-    else return this.editorView.state.doc.rangeHasMark(from, to, markType);
+    return markIsActive(this.editorView.state, markType);
+  }
+
+  markAttrs(markType) {
+    return getMarkAttrs(this.editorView.state, markType);
   }
 
   nodeActive(nodeType, attrs) {
-      let {$from, to, node} = this.editorView.state.selection;
-      if (node) return node.hasMarkup(nodeType, attrs);
-      return to <= $from.end() && $from.parent.hasMarkup(nodeType, attrs);
+    return nodeIsActive(this.editorView.state, nodeType, attrs);
+  }
+
+  selectionEmpty() {
+    return this.editorView.state.selection.empty;
+  }
+
+  insertNode(nodeType, attrs) {
+    this.editorView.dispatch(this.editorView.state.tr.replaceSelectionWith(nodeType.createAndFill(attrs)));
+    this.editorView.focus();
   }
 
   run(key) {
