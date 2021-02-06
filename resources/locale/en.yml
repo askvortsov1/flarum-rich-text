@@ -1,4 +1,4 @@
 askvortsov-rich-text:
   forum:
-    editor:
-      toggle_rich_text_label: Toggle Rich Tet
+    composer:
+      text_type_tooltip: Select Text Type

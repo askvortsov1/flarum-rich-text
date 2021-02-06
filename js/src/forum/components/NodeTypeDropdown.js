@@ -2,10 +2,6 @@ import Dropdown from 'flarum/common/components/Dropdown';
 import { setBlockType } from 'prosemirror-commands';
 
 export default class NodeTypeDropdown extends Dropdown {
-  static initAttrs(attrs) {
-    attrs.buttonClassName = 'Button Button--icon Button--link NodeTypeButton';
-  }
-
   oninit(vnode) {
     super.oninit(vnode);
 
@@ -19,12 +15,22 @@ export default class NodeTypeDropdown extends Dropdown {
     super.oncreate(vnode);
 
     this.onEditorUpdate();
+    this.$('[data-toggle="tooltip"]').tooltip();
+  }
+
+  getButton(children) {
+    return (
+      <button className='Dropdown-toggle Button Button--icon Button--link NodeTypeButton' data-toggle="dropdown">
+        <span data-toggle="tooltip" className='NodeTypeButton-tooltip' title={app.translator.trans('askvortsov-rich-text.forum.composer.text_type_tooltip')}>
+        </span>
+      </button>
+    );
   }
 
   getMenu(items) {
     return <ul className={'Dropdown-menu dropdown-menu NodeTypeDropdownMenu'}>
       {this.attrs.options.filter((_, i) => i !== this.activeIndex).map(option => (
-        <button className="Button Button--icon Button--link NodeTypeButton" title={"hello"} onclick={this.click.bind(this, option.type, option.attrs)} onkeydown={this.keydown.bind(this, option.type, option.attrs)}>
+        <button className="Button Button--icon Button--link NodeTypeButton" onclick={this.click.bind(this, option.type, option.attrs)} onkeydown={this.keydown.bind(this, option.type, option.attrs)}>
           {option.title}
         </button>
       ))}
@@ -48,7 +54,7 @@ export default class NodeTypeDropdown extends Dropdown {
 
     this.attrs.options.forEach((option, i) => {
       if (this.state.nodeActive(option.type, option.attrs)) {
-        this.element.querySelector('.Dropdown-toggle').innerText = option.title;
+        this.element.querySelector('.NodeTypeButton-tooltip').innerText = option.title;
         this.activeIndex = i;
       }
     });
