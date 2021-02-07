@@ -7,7 +7,7 @@ askvortsov-rich-text:
         title_placeholder: Title
       insert_link:
         text_placeholder: Text
-        href_placeholder: Link
+        href_placeholder: URL
         title_placeholder: Title (shows on hover)
         remove_button: Remove
       bold_tooltip: Add bold text <{modifierKey}-b>

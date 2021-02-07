@@ -36,6 +36,7 @@ export default class InsertLinkDropdown extends FormDropdown {
             name="text"
             placeholder={extractText(app.translator.trans('askvortsov-rich-text.forum.composer.insert_link.text_placeholder'))}
             bidi={this.text}
+            required
           />
         </div>,
         10
@@ -48,8 +49,10 @@ export default class InsertLinkDropdown extends FormDropdown {
         <input
           className="FormControl"
           name="href"
+          type="url"
           placeholder={extractText(app.translator.trans('askvortsov-rich-text.forum.composer.insert_link.href_placeholder'))}
           bidi={this.href}
+          required
         />
       </div>,
       10
