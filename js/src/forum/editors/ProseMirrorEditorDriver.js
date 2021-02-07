@@ -54,12 +54,12 @@ export default class ProseMirrorEditorDriver {
 
     items.add(
       'listIndentationKeybinds',
-      keymap({ 'Ctrl-m': sinkListItem(schema.nodes.list_item), 'Ctrl-Shift-m': liftListItem(schema.nodes.list_item) })
+      keymap({ 'Mod-m': sinkListItem(schema.nodes.list_item), 'Mod-Shift-m': liftListItem(schema.nodes.list_item) })
     );
 
-    items.add('markdownKeybinds', keymap(buildKeymap(schema)));
-
     items.add('submit', keymap({ 'Mod-Enter': this.attrs.onsubmit }));
+
+    items.add('markdownKeybinds', keymap(buildKeymap(schema)));
 
     items.add('baseKeymap', keymap(baseKeymap));
 
