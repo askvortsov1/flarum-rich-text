@@ -59,6 +59,14 @@
     overflow-y: auto;
     word-wrap: break-word;
     white-space: break-spaces;
+
+
+    .placeholder::before {
+        color: @control-color;
+        position: absolute;
+        cursor: text;
+        content: attr(data-before);
+    }
 }
 
 .ProseMirror-hideselection *::selection {
