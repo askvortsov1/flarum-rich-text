@@ -1,5 +1,6 @@
 import Component from 'flarum/Component';
 import icon from 'flarum/helpers/icon';
+import extractText from 'flarum/common/utils/extractText';
 
 export default class CommandButton extends Component {
   oninit(vnode) {
@@ -17,7 +18,7 @@ export default class CommandButton extends Component {
 
   view() {
     return (
-      <button className="Button Button--icon Button--link" title={this.title()} onclick={this.click.bind(this)} onkeydown={this.keydown.bind(this)}>
+      <button className="Button Button--icon Button--link" title={extractText(this.attrs.tooltip)} onclick={this.click.bind(this)} onkeydown={this.keydown.bind(this)}>
         {icon(this.attrs.icon)}
       </button>
     );
@@ -35,9 +36,7 @@ export default class CommandButton extends Component {
   }
 
   title() {
-    let tooltip = app.translator.trans(`flarum-markdown.forum.composer.${this.attrs.type}_tooltip`);
-
-    // if (this.attrs.hotkey) tooltip += ` <${modifierKey}-${this.attrs.hotkey}>`;
+    let tooltip = app.translator.trans(`askvortsov-rich-text.forum.composer.${this.attrs.type}_tooltip`);
 
     return tooltip;
   }

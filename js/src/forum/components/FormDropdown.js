@@ -20,10 +20,15 @@ export default class FormDropdown extends Dropdown {
     this.$().on('shown.bs.dropdown', () => {
       this.$('.Dropdown-menu').find('input, select, textarea').first().focus().select();
     });
+    this.$('[data-toggle="tooltip"]').tooltip();
   }
 
   getButtonContent(children) {
-    return icon(this.attrs.icon);
+    return (
+      <span data-toggle="tooltip" title={this.attrs.tooltip}>
+        {icon(this.attrs.icon)}
+      </span>
+    );
   }
 
   getMenu(items) {

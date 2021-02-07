@@ -24,10 +24,13 @@ export default class ProseMirrorMenu extends Component {
     const items = new ItemList();
     const state = this.attrs.state;
 
+    const modifierKey = navigator.userAgent.match(/Macintosh/) ? '⌘' : 'ctrl';
+
     items.add(
       'text_type',
       NodeTypeDropdown.component({
         type: 'text_type',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.text_type_tooltip'),
         state: state,
         options: [
           {
@@ -73,6 +76,7 @@ export default class ProseMirrorMenu extends Component {
       MarkButton.component({
         type: 'bold',
         icon: 'fas fa-bold',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.bold_tooltip', {modifierKey}),
         state: state,
         mark: state.getSchema().marks.strong,
       })
@@ -83,6 +87,7 @@ export default class ProseMirrorMenu extends Component {
       MarkButton.component({
         type: 'italic',
         icon: 'fas fa-italic',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.italic_tooltip', { modifierKey }),
         state: state,
         mark: state.getSchema().marks.em,
       })
@@ -93,6 +98,7 @@ export default class ProseMirrorMenu extends Component {
       CommandButton.component({
         type: 'quote',
         icon: 'fas fa-quote-left',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.quote_tooltip'),
         state: state,
         command: wrapIn(state.getSchema().nodes.blockquote),
       })
@@ -103,6 +109,7 @@ export default class ProseMirrorMenu extends Component {
       MarkButton.component({
         type: 'code',
         icon: 'fas fa-code',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.code_tooltip'),
         state: state,
         mark: state.getSchema().marks.code,
       })
@@ -113,6 +120,7 @@ export default class ProseMirrorMenu extends Component {
       InsertLinkDropdown.component({
         type: 'link',
         icon: 'fas fa-link',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.link_tooltip'),
         state: state,
         mark: state.getSchema().marks.link
       })
@@ -123,6 +131,7 @@ export default class ProseMirrorMenu extends Component {
       InsertImageDropdown.component({
         type: 'image',
         icon: 'fas fa-image',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.image_tooltip'),
         state: state,
         node: state.getSchema().nodes.image
       })
@@ -133,6 +142,7 @@ export default class ProseMirrorMenu extends Component {
       ListButton.component({
         type: 'unordered_list',
         icon: 'fas fa-list-ul',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.unordered_list_tooltip'),
         state: state,
         listType: state.getSchema().nodes.bullet_list,
       })
@@ -143,6 +153,7 @@ export default class ProseMirrorMenu extends Component {
       ListButton.component({
         type: 'ordered_list',
         icon: 'fas fa-list-ol',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.ordered_list_tooltip'),
         state: state,
         listType: state.getSchema().nodes.ordered_list,
       })

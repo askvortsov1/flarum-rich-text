@@ -21,7 +21,7 @@ export default class NodeTypeDropdown extends Dropdown {
   getButton(children) {
     return (
       <button className='Dropdown-toggle Button Button--icon Button--link NodeTypeButton' data-toggle="dropdown">
-        <span data-toggle="tooltip" className='NodeTypeButton-tooltip' title={app.translator.trans('askvortsov-rich-text.forum.composer.text_type_tooltip')}>
+        <span data-toggle="tooltip" title={this.attrs.tooltip}>
         </span>
       </button>
     );
@@ -54,7 +54,7 @@ export default class NodeTypeDropdown extends Dropdown {
 
     this.attrs.options.forEach((option, i) => {
       if (this.state.nodeActive(option.type, option.attrs)) {
-        this.element.querySelector('.NodeTypeButton-tooltip').innerText = option.title;
+        this.element.children[0].children[0].innerText = option.title;
         this.activeIndex = i;
       }
     });

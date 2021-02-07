@@ -67,7 +67,7 @@ export default class InsertLinkDropdown extends FormDropdown {
     if (this.active) {
       items.add('remove',
         <Button onclick={this.remove.bind(this)} className="Button Button--danger">
-          {app.translator.trans('askvortsov-rich-text.forum.composer.remove_button')}
+          {app.translator.trans('askvortsov-rich-text.forum.composer.insert_link.remove_button')}
         </Button>,
         -10
       );

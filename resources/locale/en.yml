@@ -9,5 +9,14 @@ askvortsov-rich-text:
         text_placeholder: Text
         href_placeholder: Link
         title_placeholder: Title (shows on hover)
-      remove_button: Remove
+        remove_button: Remove
+      bold_tooltip: Add bold text <{modifierKey}-b>
+      code_tooltip: Insert code
+      header_tooltip: Add header text
+      image_tooltip: Add an image
+      italic_tooltip: Add italic text <{modifierKey}-i>
+      link_tooltip: Add a link
+      ordered_list_tooltip: Add a numbered list
+      quote_tooltip: Insert a quote
       text_type_tooltip: Select Text Type
+      unordered_list_tooltip: Add a bulleted list
