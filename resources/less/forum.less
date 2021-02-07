@@ -1,6 +1,10 @@
 .TextEditor-controls {
     overflow-x: initial;
 
+    .ProseMirrorMenu {
+        display: inline-block;
+    }
+
     .NodeTypeDropdownMenu {
         min-width: unset;
         padding: 5px 3px;
@@ -94,8 +98,4 @@ li.ProseMirror-selectednode:after {
     to {
         visibility: hidden;
     }
-}
-
-.ProseMirror-focused .ProseMirror-gapcursor {
-    display: block;
 }
