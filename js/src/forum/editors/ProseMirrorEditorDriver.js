@@ -1,8 +1,7 @@
 import { baseKeymap } from 'tiptap-commands';
 import { undo, redo, history } from 'prosemirror-history';
 import { keymap } from 'prosemirror-keymap';
-import { schema, defaultMarkdownParser, defaultMarkdownSerializer } from 'prosemirror-markdown';
-import { Schema } from 'prosemirror-model';
+import { schema as defaultMarkdownSchema, defaultMarkdownParser, defaultMarkdownSerializer } from 'prosemirror-markdown';
 import { EditorState, TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { buildInputRules, buildKeymap } from 'prosemirror-example-setup';
@@ -21,7 +20,7 @@ export default class ProseMirrorEditorDriver {
 
   build(target, attrs) {
     this.attrs = attrs;
-    this.schema = new Schema(this.buildSchemaConfig());
+    this.schema = this.buildSchema();
     this.state = EditorState.create(this.buildEditorStateConfig());
     this.view = new EditorView(target, this.buildEditorProps());
 
@@ -29,18 +28,25 @@ export default class ProseMirrorEditorDriver {
     cssClasses.forEach((className) => this.view.dom.classList.add(className));
   }
 
-  buildSchemaConfig() {
-    const newSpec = {
-      nodes: schema.spec.nodes,
-      marks: schema.spec.marks,
-    };
+  buildSchema() {
+    const schema = defaultMarkdownSchema;
 
-    return newSpec;
+
+    // TODO: Do this without mutating the global markdown schema object.
+    // Hacky workaround to make all lists tight
+    // This is discouraged as it mutates a globally shared objects.
+    // However, instantiating a new schema breaks input rules for some reason.
+    schema.nodes.bullet_list.attrs.tight.default = true;
+    schema.nodes.bullet_list.defaultAttrs.tight = true;
+    schema.nodes.ordered_list.attrs.tight.default = true;
+    schema.nodes.ordered_list.defaultAttrs.tight = true;
+
+    return schema;
   }
 
   buildEditorStateConfig() {
     return {
-      doc: defaultMarkdownParser.parse(this.attrs.value),
+      doc: this.parseInitialValue(this.attrs.value),
       disabled: this.attrs.disabled,
       schema: this.schema,
       plugins: this.buildPluginItems().toArray(),
@@ -50,16 +56,16 @@ export default class ProseMirrorEditorDriver {
   buildPluginItems() {
     const items = new ItemList();
 
-    items.add('markdownInputrules', buildInputRules(schema));
+    items.add('markdownInputrules', buildInputRules(this.schema));
 
     items.add(
       'listIndentationKeybinds',
-      keymap({ 'Mod-m': sinkListItem(schema.nodes.list_item), 'Mod-Shift-m': liftListItem(schema.nodes.list_item) })
+      keymap({ 'Mod-m': sinkListItem(this.schema.nodes.list_item), 'Mod-Shift-m': liftListItem(this.schema.nodes.list_item) })
     );
 
     items.add('submit', keymap({ 'Mod-Enter': this.attrs.onsubmit }));
 
-    items.add('markdownKeybinds', keymap(buildKeymap(schema)));
+    items.add('markdownKeybinds', keymap(buildKeymap(this.schema)));
 
     items.add('baseKeymap', keymap(baseKeymap));
 
@@ -101,7 +107,7 @@ export default class ProseMirrorEditorDriver {
   }
 
   serializeContent(doc, schema) {
-    return defaultMarkdownSerializer.serialize(doc);
+    return defaultMarkdownSerializer.serialize(doc, {tightLists: true});
   }
 
   // External Control Stuff
