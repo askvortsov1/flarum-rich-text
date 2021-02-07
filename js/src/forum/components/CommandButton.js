@@ -18,7 +18,12 @@ export default class CommandButton extends Component {
 
   view() {
     return (
-      <button className="Button Button--icon Button--link" title={extractText(this.attrs.tooltip)} onclick={this.click.bind(this)} onkeydown={this.keydown.bind(this)}>
+      <button
+        className="Button Button--icon Button--link"
+        title={extractText(this.attrs.tooltip)}
+        onclick={this.click.bind(this)}
+        onkeydown={this.keydown.bind(this)}
+      >
         {icon(this.attrs.icon)}
       </button>
     );

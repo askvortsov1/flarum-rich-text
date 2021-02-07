@@ -15,9 +15,13 @@ export default class InsertLinkDropdown extends FormDropdown {
     this.href = Stream('');
     this.title = Stream('');
 
-    this.state.addItem(this.attrs.type, (state, dispatch) => {
-      this.command(state, dispatch);
-    }, this.onEditorUpdate.bind(this));
+    this.state.addItem(
+      this.attrs.type,
+      (state, dispatch) => {
+        this.command(state, dispatch);
+      },
+      this.onEditorUpdate.bind(this)
+    );
   }
 
   fields() {
@@ -65,7 +69,8 @@ export default class InsertLinkDropdown extends FormDropdown {
     );
 
     if (this.active) {
-      items.add('remove',
+      items.add(
+        'remove',
         <Button onclick={this.remove.bind(this)} className="Button Button--danger">
           {app.translator.trans('askvortsov-rich-text.forum.composer.insert_link.remove_button')}
         </Button>,
@@ -80,9 +85,9 @@ export default class InsertLinkDropdown extends FormDropdown {
     const linkAttrs = { href: this.href(), title: this.title() };
 
     if (this.selectionEmpty) {
-      this.command = insertLink(this.text(), this.attrs.mark, linkAttrs)
+      this.command = insertLink(this.text(), this.attrs.mark, linkAttrs);
 
-      this.text("");
+      this.text('');
     } else {
       this.command = updateMark(this.attrs.mark, linkAttrs);
     }
@@ -91,7 +96,7 @@ export default class InsertLinkDropdown extends FormDropdown {
   }
 
   remove(e) {
-    $("body").trigger("click");
+    $('body').trigger('click');
     this.command = removeMark(this.attrs.mark);
     this.state.run(this.attrs.type);
     app.composer.editor.focus();

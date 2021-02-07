@@ -6,9 +6,13 @@ export default class NodeTypeDropdown extends Dropdown {
     super.oninit(vnode);
 
     this.state = this.attrs.state;
-    this.state.addItem(this.attrs.type, (state, dispatch) => {
-      return this.command(state, dispatch);
-    }, this.onEditorUpdate.bind(this));
+    this.state.addItem(
+      this.attrs.type,
+      (state, dispatch) => {
+        return this.command(state, dispatch);
+      },
+      this.onEditorUpdate.bind(this)
+    );
   }
 
   oncreate(vnode) {
@@ -20,21 +24,28 @@ export default class NodeTypeDropdown extends Dropdown {
 
   getButton(children) {
     return (
-      <button className='Dropdown-toggle Button Button--icon Button--link NodeTypeButton' data-toggle="dropdown">
-        <span data-toggle="tooltip" title={this.attrs.tooltip}>
-        </span>
+      <button className="Dropdown-toggle Button Button--icon Button--link NodeTypeButton" data-toggle="dropdown">
+        <span data-toggle="tooltip" title={this.attrs.tooltip}></span>
       </button>
     );
   }
 
   getMenu(items) {
-    return <ul className={'Dropdown-menu dropdown-menu NodeTypeDropdownMenu'}>
-      {this.attrs.options.filter((_, i) => i !== this.activeIndex).map(option => (
-        <button className="Button Button--icon Button--link NodeTypeButton" onclick={this.click.bind(this, option.type, option.attrs)} onkeydown={this.keydown.bind(this, option.type, option.attrs)}>
-          {option.title}
-        </button>
-      ))}
-    </ul>;
+    return (
+      <ul className={'Dropdown-menu dropdown-menu NodeTypeDropdownMenu'}>
+        {this.attrs.options
+          .filter((_, i) => i !== this.activeIndex)
+          .map((option) => (
+            <button
+              className="Button Button--icon Button--link NodeTypeButton"
+              onclick={this.click.bind(this, option.type, option.attrs)}
+              onkeydown={this.keydown.bind(this, option.type, option.attrs)}
+            >
+              {option.title}
+            </button>
+          ))}
+      </ul>
+    );
   }
 
   keydown(type, attrs, e) {

@@ -45,10 +45,10 @@ export default class InsertImageDropdown extends FormDropdown {
   insert(e) {
     this.state.insertNode(this.attrs.node, {
       src: this.src(),
-      title: this.title()
+      title: this.title(),
     });
 
-    this.src("");
-    this.title("");
+    this.src('');
+    this.title('');
   }
 }

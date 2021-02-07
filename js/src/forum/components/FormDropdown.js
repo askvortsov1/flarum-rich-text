@@ -32,17 +32,20 @@ export default class FormDropdown extends Dropdown {
   }
 
   getMenu(items) {
-    return <ul className={'Dropdown-menu dropdown-menu FormDropdown'}>
-      <form className="Form" onsubmit={this.onsubmit.bind(this)}>
-        {this.fields().toArray()}
-      </form>
-    </ul>;
+    return (
+      <ul className={'Dropdown-menu dropdown-menu FormDropdown'}>
+        <form className="Form" onsubmit={this.onsubmit.bind(this)}>
+          {this.fields().toArray()}
+        </form>
+      </ul>
+    );
   }
 
   fields() {
     const items = new ItemList();
 
-    items.add('insert',
+    items.add(
+      'insert',
       <Button type="submit" className="Button Button--primary">
         {app.translator.trans('askvortsov-rich-text.forum.composer.insert_button')}
       </Button>
@@ -53,10 +56,10 @@ export default class FormDropdown extends Dropdown {
 
   onsubmit(e) {
     e.preventDefault();
-    $("body").trigger("click");
+    $('body').trigger('click');
     this.insert(e);
     app.composer.editor.focus();
   }
 
-  insert(e) { }
+  insert(e) {}
 }

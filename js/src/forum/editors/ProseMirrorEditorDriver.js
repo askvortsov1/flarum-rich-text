@@ -130,7 +130,7 @@ export default class ProseMirrorEditorDriver {
   getLastNChars(n) {
     const lastNode = this.view.state.selection.$from.nodeBefore;
 
-    if (!lastNode || !lastNode.text) return "";
+    if (!lastNode || !lastNode.text) return '';
 
     return lastNode.text.slice(Math.max(0, lastNode.text.length - n));
   }
@@ -173,7 +173,6 @@ export default class ProseMirrorEditorDriver {
     } else {
       transaction = this.view.state.tr.insertText(text, start, end);
     }
-
 
     this.view.dispatch(transaction);
     $(this.view.dom).click();

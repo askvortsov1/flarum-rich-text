@@ -36,38 +36,38 @@ export default class ProseMirrorMenu extends Component {
           {
             title: 'H1',
             type: state.getSchema().nodes.heading,
-            attrs: { level: 1 }
+            attrs: { level: 1 },
           },
           {
             title: 'H2',
             type: state.getSchema().nodes.heading,
-            attrs: { level: 2 }
+            attrs: { level: 2 },
           },
           {
             title: 'H3',
             type: state.getSchema().nodes.heading,
-            attrs: { level: 3 }
+            attrs: { level: 3 },
           },
           {
             title: 'H4',
             type: state.getSchema().nodes.heading,
-            attrs: { level: 4 }
+            attrs: { level: 4 },
           },
           {
             title: 'H5',
             type: state.getSchema().nodes.heading,
-            attrs: { level: 5 }
+            attrs: { level: 5 },
           },
           {
             title: 'H6',
             type: state.getSchema().nodes.heading,
-            attrs: { level: 6 }
+            attrs: { level: 6 },
           },
           {
             title: 'P',
-            type: state.getSchema().nodes.paragraph
-          }
-        ]
+            type: state.getSchema().nodes.paragraph,
+          },
+        ],
       })
     );
 
@@ -76,7 +76,7 @@ export default class ProseMirrorMenu extends Component {
       MarkButton.component({
         type: 'bold',
         icon: 'fas fa-bold',
-        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.bold_tooltip', {modifierKey}),
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.bold_tooltip', { modifierKey }),
         state: state,
         mark: state.getSchema().marks.strong,
       })
@@ -122,7 +122,7 @@ export default class ProseMirrorMenu extends Component {
         icon: 'fas fa-link',
         tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.link_tooltip'),
         state: state,
-        mark: state.getSchema().marks.link
+        mark: state.getSchema().marks.link,
       })
     );
 
@@ -133,7 +133,7 @@ export default class ProseMirrorMenu extends Component {
         icon: 'fas fa-image',
         tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.image_tooltip'),
         state: state,
-        node: state.getSchema().nodes.image
+        node: state.getSchema().nodes.image,
       })
     );
 
