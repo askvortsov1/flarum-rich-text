@@ -38,58 +38,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     word-wrap: break-word;
-    white-space: pre-wrap;
     white-space: break-spaces;
-    -webkit-font-variant-ligatures: none;
-    font-variant-ligatures: none;
-    font-feature-settings: "liga"0;
-    /* the above doesn't seem to work in Edge */
-
-    p {
-        margin: 0;
-    }
-
-    pre {
-        background-color: @code-bg;
-        color: @code-color;
-        white-space: pre-wrap;
-    }
-
-    li {
-        position: relative;
-    }
-
-    ul, ol {
-        padding-left: 30px;
-    }
-
-    blockquote {
-        padding-left: 1em;
-        border-left: 3px solid #eee;
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    p:first-child,
-    h1:first-child,
-    h2:first-child,
-    h3:first-child,
-    h4:first-child,
-    h5:first-child,
-    h6:first-child {
-        margin-top: 0;
-    }
-
-    img {
-        max-width: 100%;
-    }
-
-    .placeholder::before {
-        color: @control-color;
-        position: absolute;
-        cursor: text;
-        content: attr(data-before);
-    }
 }
 
 .ProseMirror-hideselection *::selection {

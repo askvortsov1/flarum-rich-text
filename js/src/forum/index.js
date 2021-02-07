@@ -15,6 +15,7 @@ app.initializers.add('askvortsov/flarum-rich-text', () => {
 
   extend(TextEditor.prototype, 'buildEditorParams', function (items) {
     items.menuState = this.menuState = new MenuState();
+    items.classNames.push('Post-body');
   });
 
   override(TextEditor.prototype, 'buildEditor', function (original, dom) {
