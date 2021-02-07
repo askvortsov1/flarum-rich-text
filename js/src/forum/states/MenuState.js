@@ -45,7 +45,7 @@ export default class MenuState {
   }
 
   insertNode(nodeType, attrs) {
-    const node = nodeType.createAndFill(attrs)
+    const node = nodeType.createAndFill(attrs);
 
     let transaction;
     if (this.editorView.state.selection.empty) {

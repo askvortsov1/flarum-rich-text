@@ -7,26 +7,26 @@ import ProseMirrorMenu from './components/ProseMirrorMenu';
 import MenuState from './states/MenuState';
 
 export default function applyEditor() {
-    extend(TextEditor.prototype, 'toolbarItems', function (items) {
-        if (!app.session.user.preferences().useRichTextEditor) return;
+  extend(TextEditor.prototype, 'toolbarItems', function (items) {
+    if (!app.session.user.preferences().useRichTextEditor) return;
 
-        items.remove('markdown');
+    items.remove('markdown');
 
-        items.add('prosemirror-menu', <ProseMirrorMenu state={this.menuState}></ProseMirrorMenu>, 100);
-    });
+    items.add('prosemirror-menu', <ProseMirrorMenu state={this.menuState}></ProseMirrorMenu>, 100);
+  });
 
-    extend(TextEditor.prototype, 'buildEditorParams', function (items) {
-        if (!app.session.user.preferences().useRichTextEditor) return;
+  extend(TextEditor.prototype, 'buildEditorParams', function (items) {
+    if (!app.session.user.preferences().useRichTextEditor) return;
 
-        items.menuState = this.menuState = new MenuState();
-        items.classNames.push('Post-body');
-    });
+    items.menuState = this.menuState = new MenuState();
+    items.classNames.push('Post-body');
+  });
 
-    override(TextEditor.prototype, 'buildEditor', function (original, dom) {
-        if (app.session.user.preferences().useRichTextEditor) {
-            return new ProseMirrorEditorDriver(dom, this.buildEditorParams());
-        }
+  override(TextEditor.prototype, 'buildEditor', function (original, dom) {
+    if (app.session.user.preferences().useRichTextEditor) {
+      return new ProseMirrorEditorDriver(dom, this.buildEditorParams());
+    }
 
-        return original(dom);
-    });
+    return original(dom);
+  });
 }

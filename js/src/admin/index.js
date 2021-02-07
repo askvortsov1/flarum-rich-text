@@ -1,2 +1,1 @@
-app.initializers.add('askvortsov/flarum-rich-text', () => {
-});
+app.initializers.add('askvortsov/flarum-rich-text', () => {});

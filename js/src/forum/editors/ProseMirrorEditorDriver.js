@@ -31,7 +31,6 @@ export default class ProseMirrorEditorDriver {
   buildSchema() {
     const schema = defaultMarkdownSchema;
 
-
     // TODO: Do this without mutating the global markdown schema object.
     // Hacky workaround to make all lists tight
     // This is discouraged as it mutates a globally shared objects.
@@ -107,7 +106,7 @@ export default class ProseMirrorEditorDriver {
   }
 
   serializeContent(doc, schema) {
-    return defaultMarkdownSerializer.serialize(doc, {tightLists: true});
+    return defaultMarkdownSerializer.serialize(doc, { tightLists: true });
   }
 
   // External Control Stuff
