@@ -146,8 +146,8 @@ export default class ProseMirrorEditorDriver {
    *
    * @param {String} text
    */
-  insertAtCursor(text, rawMarkdown = false) {
-    this.insertAt(this.getSelectionRange()[0], text, rawMarkdown);
+  insertAtCursor(text, escape) {
+    this.insertAt(this.getSelectionRange()[0], text, escape);
   }
 
   /**
@@ -156,8 +156,8 @@ export default class ProseMirrorEditorDriver {
    * @param {number} pos
    * @param {String} text
    */
-  insertAt(pos, text, rawMarkdown = false) {
-    this.insertBetween(pos, pos, text, rawMarkdown);
+  insertAt(pos, text, escape) {
+    this.insertBetween(pos, pos, text, escape);
   }
 
   /**
@@ -171,13 +171,13 @@ export default class ProseMirrorEditorDriver {
    * @param text
    * @param rawMarkdown
    */
-  insertBetween(start, end, text, rawMarkdown = false) {
+  insertBetween(start, end, text, escape = true) {
     let transaction;
 
-    if (rawMarkdown) {
-      transaction = this.view.state.tr.insert(start, this.parseInitialValue(text));
-    } else {
+    if (escape) {
       transaction = this.view.state.tr.insertText(text, start, end);
+    } else {
+      transaction = this.view.state.tr.insert(start, this.parseInitialValue(text));
     }
 
     this.view.dispatch(transaction);
@@ -193,8 +193,8 @@ export default class ProseMirrorEditorDriver {
    * @param start
    * @param text
    */
-  replaceBeforeCursor(start, text, rawMarkdown = false) {
-    this.insertBetween(start, this.getSelectionRange()[0], text, rawMarkdown);
+  replaceBeforeCursor(start, text, escape) {
+    this.insertBetween(start, this.getSelectionRange()[0], text, escape);
   }
 
   /**
