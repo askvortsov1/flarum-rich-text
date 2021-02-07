@@ -130,7 +130,7 @@ export default class ProseMirrorEditorDriver {
   getLastNChars(n) {
     const lastNode = this.view.state.selection.$from.nodeBefore;
 
-    if (!lastNode) return "";
+    if (!lastNode || !lastNode.text) return "";
 
     return lastNode.text.slice(Math.max(0, lastNode.text.length - n));
   }
