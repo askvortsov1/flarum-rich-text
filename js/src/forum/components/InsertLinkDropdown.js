@@ -4,7 +4,7 @@ import Stream from 'flarum/common/utils/Stream';
 import FormDropdown from './FormDropdown';
 
 import { removeMark, updateMark } from 'tiptap-commands';
-import insertLink from '../editors/insertLink';
+import insertLink from '../proseMirror/commands/insertLink';
 
 export default class InsertLinkDropdown extends FormDropdown {
   oninit(vnode) {

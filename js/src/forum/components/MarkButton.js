@@ -1,5 +1,5 @@
 import CommandButton from './CommandButton';
-import updateToggleMark from '../editors/updateToggleMark';
+import updateToggleMark from '../proseMirror/commands/updateToggleMark';
 
 export default class MarkButton extends CommandButton {
   static initAttrs(attrs) {

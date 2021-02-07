@@ -2,7 +2,7 @@ import { extend, override } from 'flarum/extend';
 
 import TextEditor from 'flarum/components/TextEditor';
 
-import ProseMirrorEditorDriver from './editors/ProseMirrorEditorDriver';
+import ProseMirrorEditorDriver from './proseMirror/ProseMirrorEditorDriver';
 import ProseMirrorMenu from './components/ProseMirrorMenu';
 import MenuState from './states/MenuState';
 

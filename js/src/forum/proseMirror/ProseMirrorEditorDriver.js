@@ -9,9 +9,9 @@ import { liftListItem, sinkListItem } from 'tiptap-commands';
 import { dropCursor } from 'prosemirror-dropcursor';
 
 import ItemList from 'flarum/common/utils/ItemList';
-import disabledPlugin from './disabledPlugin';
-import placeholderPlugin from './placeholderPlugin';
-import menuPlugin from './menuPlugin';
+import disabledPlugin from './plugins/disabledPlugin';
+import placeholderPlugin from './plugins/placeholderPlugin';
+import menuPlugin from './plugins/menuPlugin';
 
 export default class ProseMirrorEditorDriver {
   constructor(target, attrs) {
