@@ -45,7 +45,15 @@ export default class MenuState {
   }
 
   insertNode(nodeType, attrs) {
-    this.editorView.dispatch(this.editorView.state.tr.replaceSelectionWith(nodeType.createAndFill(attrs)));
+    const node = nodeType.createAndFill(attrs)
+
+    let transaction;
+    if (this.editorView.state.selection.empty) {
+      transaction = this.editorView.state.tr.insert(this.editorView.state.selection.from, node);
+    } else {
+      transaction = this.editorView.state.tr.replaceSelection(node);
+    }
+    this.editorView.dispatch(transaction);
     this.editorView.focus();
   }
 
