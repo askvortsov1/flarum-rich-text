@@ -38,6 +38,22 @@
     }
 }
 
+@media @phone {
+    .TextEditor-controls {
+        .NodeTypeDropdownMenu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .NodeTypeButton {
+                padding: 4px 0;
+                margin: 0;
+                width: 100%;
+            }
+        }
+    }
+}
+
 .TextEditor .ProseMirror {
     overflow-x: hidden;
     overflow-y: auto;
