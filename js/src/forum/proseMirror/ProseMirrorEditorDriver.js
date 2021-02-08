@@ -1,17 +1,17 @@
 import { baseKeymap } from 'tiptap-commands';
-import { undo, redo, history } from 'prosemirror-history';
+import { history } from 'prosemirror-history';
 import { keymap } from 'prosemirror-keymap';
 import { schema as defaultMarkdownSchema, defaultMarkdownParser, defaultMarkdownSerializer } from 'prosemirror-markdown';
 import { EditorState, TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { buildInputRules, buildKeymap } from 'prosemirror-example-setup';
-import { liftListItem, sinkListItem } from 'tiptap-commands';
 import { dropCursor } from 'prosemirror-dropcursor';
 
 import ItemList from 'flarum/common/utils/ItemList';
 import disabledPlugin from './plugins/disabledPlugin';
 import placeholderPlugin from './plugins/placeholderPlugin';
 import menuPlugin from './plugins/menuPlugin';
+import richTextKeymap from './key-bindings';
 
 export default class ProseMirrorEditorDriver {
   constructor(target, attrs) {
@@ -57,24 +57,15 @@ export default class ProseMirrorEditorDriver {
 
     items.add('markdownInputrules', buildInputRules(this.schema));
 
-    items.add(
-      'listIndentationKeybinds',
-      keymap({ 'Mod-m': sinkListItem(this.schema.nodes.list_item), 'Mod-Shift-m': liftListItem(this.schema.nodes.list_item) })
-    );
-
     items.add('submit', keymap({ 'Mod-Enter': this.attrs.onsubmit }));
 
-    items.add('markdownKeybinds', keymap(buildKeymap(this.schema)));
+    items.add('richTextKeymap', keymap(richTextKeymap(this.schema)));
 
     items.add('baseKeymap', keymap(baseKeymap));
-
-    items.add('shiftEnterSameAsEnter', keymap({ 'Shift-Enter': baseKeymap['Enter'] }));
 
     items.add('placeholder', placeholderPlugin(this.attrs.placeholder));
 
     items.add('history', history());
-
-    items.add('historyKeymap', keymap({ 'Mod-z': undo, 'Mod-y': redo }));
 
     items.add('disabled', disabledPlugin());
 
