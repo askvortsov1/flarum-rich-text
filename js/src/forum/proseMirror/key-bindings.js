@@ -1,6 +1,6 @@
 import { redo, undo } from "prosemirror-history";
 import { undoInputRule } from "prosemirror-inputrules";
-import { chainCommands, exitCode, liftListItem, selectParentNode, setBlockType, sinkListItem, splitListItem, wrapIn, wrapInList } from "tiptap-commands";
+import { chainCommands, exitCode, liftListItem, selectParentNode, setBlockType, sinkListItem, splitListItem, toggleList, wrapIn } from "tiptap-commands";
 import updateToggleMark from './commands/updateToggleMark';
 
 export default function richTextKeymap(schema) {
@@ -22,8 +22,8 @@ export default function richTextKeymap(schema) {
         "Mod-i": updateToggleMark(schema.marks.em),
         "Mod-`": updateToggleMark(schema.marks.code),
         // Formatting: Wrap
-        "Shift-Mod-8": wrapInList(schema.nodes.bullet_list),
-        "Shift-Mod-9": wrapInList(schema.nodes.ordered_list),
+        "Shift-Mod-8": toggleList(schema.nodes.bullet_list),
+        "Shift-Mod-9": toggleList(schema.nodes.ordered_list),
         "Mod->": wrapIn(schema.nodes.blockquote),
         // Formatting: Type
         "Shift-Ctrl-0": setBlockType(schema.nodes.paragraph),
