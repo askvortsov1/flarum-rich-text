@@ -5,11 +5,23 @@ export default class MarkdownParserBuilder {
         this.schema = schema;
     }
 
+    tokenizerParams() {
+        return { html: false };
+    }
+
+    buildTokenizer() {
+        return markdownit("commonmark", this.tokenizerParams());
+    }
+
+    buildTokens() {
+        return defaultMarkdownParser.tokens;
+    }
+
     build() {
         return new MarkdownParser(
             this.schema,
-            defaultMarkdownParser.tokenizer,
-            defaultMarkdownParser.tokens
+            this.buildTokenizer(),
+            this.buildTokens()
         );
     }
 }
