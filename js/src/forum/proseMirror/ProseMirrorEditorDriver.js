@@ -4,7 +4,6 @@ import { keymap } from 'prosemirror-keymap';
 import { schema as defaultMarkdownSchema, defaultMarkdownParser, defaultMarkdownSerializer } from 'prosemirror-markdown';
 import { EditorState, TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { buildInputRules, buildKeymap } from 'prosemirror-example-setup';
 import { dropCursor } from 'prosemirror-dropcursor';
 
 import ItemList from 'flarum/common/utils/ItemList';
@@ -12,6 +11,7 @@ import disabledPlugin from './plugins/disabledPlugin';
 import placeholderPlugin from './plugins/placeholderPlugin';
 import menuPlugin from './plugins/menuPlugin';
 import richTextKeymap from './key-bindings';
+import buildInputRules from './inputrules';
 
 export default class ProseMirrorEditorDriver {
   constructor(target, attrs) {
