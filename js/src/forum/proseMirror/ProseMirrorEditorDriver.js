@@ -1,7 +1,6 @@
 import { baseKeymap } from 'tiptap-commands';
 import { history } from 'prosemirror-history';
 import { keymap } from 'prosemirror-keymap';
-import { schema as defaultMarkdownSchema, defaultMarkdownParser, defaultMarkdownSerializer } from 'prosemirror-markdown';
 import { EditorState, TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { dropCursor } from 'prosemirror-dropcursor';
@@ -12,6 +11,9 @@ import placeholderPlugin from './plugins/placeholderPlugin';
 import menuPlugin from './plugins/menuPlugin';
 import richTextKeymap from './key-bindings';
 import buildInputRules from './inputrules';
+import MarkdownSerializerBuilder from './markdown/MarkdownSerializerBuilder';
+import MarkdownParserBuilder from './markdown/MarkdownParserBuilder';
+import SchemaBuilder from './markdown/SchemaBuilder';
 
 export default class ProseMirrorEditorDriver {
   constructor(target, attrs) {
@@ -20,27 +22,16 @@ export default class ProseMirrorEditorDriver {
 
   build(target, attrs) {
     this.attrs = attrs;
-    this.schema = this.buildSchema();
+    this.schema = (new SchemaBuilder()).build();
+
+    this.parser = (new MarkdownParserBuilder(this.schema)).build();
+    this.serializer = (new MarkdownSerializerBuilder()).build();
+
     this.state = EditorState.create(this.buildEditorStateConfig());
     this.view = new EditorView(target, this.buildEditorProps());
 
     const cssClasses = attrs.classNames || [];
     cssClasses.forEach((className) => this.view.dom.classList.add(className));
-  }
-
-  buildSchema() {
-    const schema = defaultMarkdownSchema;
-
-    // TODO: Do this without mutating the global markdown schema object.
-    // Hacky workaround to make all lists tight
-    // This is discouraged as it mutates a globally shared objects.
-    // However, instantiating a new schema breaks input rules for some reason.
-    schema.nodes.bullet_list.attrs.tight.default = true;
-    schema.nodes.bullet_list.defaultAttrs.tight = true;
-    schema.nodes.ordered_list.attrs.tight.default = true;
-    schema.nodes.ordered_list.defaultAttrs.tight = true;
-
-    return schema;
   }
 
   buildEditorStateConfig() {
@@ -92,12 +83,12 @@ export default class ProseMirrorEditorDriver {
     };
   }
 
-  parseInitialValue(text, schema) {
-    return defaultMarkdownParser.parse(text);
+  parseInitialValue(text) {
+    return this.parser.parse(text);
   }
 
-  serializeContent(doc, schema) {
-    return defaultMarkdownSerializer.serialize(doc, { tightLists: true });
+  serializeContent(doc) {
+    return this.serializer.serialize(doc, { tightLists: true });
   }
 
   // External Control Stuff
