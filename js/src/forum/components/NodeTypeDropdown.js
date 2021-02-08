@@ -1,4 +1,5 @@
 import Dropdown from 'flarum/common/components/Dropdown';
+import extractText from 'flarum/common/utils/extractText';
 import { setBlockType } from 'tiptap-commands';
 
 export default class NodeTypeDropdown extends Dropdown {
@@ -24,7 +25,7 @@ export default class NodeTypeDropdown extends Dropdown {
 
   getButton(children) {
     return (
-      <button className="Dropdown-toggle Button Button--icon Button--link NodeTypeButton" data-toggle="dropdown">
+      <button className="Dropdown-toggle Button Button--icon Button--link NodeTypeButton Button--menuDropdown" data-toggle="dropdown">
         <span data-toggle="tooltip" title={this.attrs.tooltip}></span>
       </button>
     );
@@ -38,6 +39,8 @@ export default class NodeTypeDropdown extends Dropdown {
           .map((option) => (
             <button
               className="Button Button--icon Button--link NodeTypeButton"
+              title={extractText(option.tooltip)}
+              data-toggle="tooltip"
               onclick={this.click.bind(this, option.type, option.attrs)}
               onkeydown={this.keydown.bind(this, option.type, option.attrs)}
             >

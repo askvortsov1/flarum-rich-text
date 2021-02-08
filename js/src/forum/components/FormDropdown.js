@@ -5,7 +5,7 @@ import ItemList from 'flarum/common/utils/ItemList';
 
 export default class FormDropdown extends Dropdown {
   static initAttrs(attrs) {
-    attrs.buttonClassName = 'Button Button--icon Button--link';
+    attrs.buttonClassName = 'Button Button--icon Button--link Button--menuDropdown';
   }
 
   oninit(vnode) {

@@ -37,35 +37,42 @@ export default class ProseMirrorMenu extends Component {
             title: 'H1',
             type: state.getSchema().nodes.heading,
             attrs: { level: 1 },
+            tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.header_tooltip', { modifierKey, level: 1 }),
           },
           {
             title: 'H2',
             type: state.getSchema().nodes.heading,
             attrs: { level: 2 },
+            tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.header_tooltip', { modifierKey, level: 2 }),
           },
           {
             title: 'H3',
             type: state.getSchema().nodes.heading,
             attrs: { level: 3 },
+            tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.header_tooltip', { modifierKey, level: 3 }),
           },
           {
             title: 'H4',
             type: state.getSchema().nodes.heading,
             attrs: { level: 4 },
+            tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.header_tooltip', { modifierKey, level: 4 }),
           },
           {
             title: 'H5',
             type: state.getSchema().nodes.heading,
             attrs: { level: 5 },
+            tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.header_tooltip', { modifierKey, level: 5 }),
           },
           {
             title: 'H6',
             type: state.getSchema().nodes.heading,
             attrs: { level: 6 },
+            tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.header_tooltip', { modifierKey, level: 6 }),
           },
           {
             title: 'P',
             type: state.getSchema().nodes.paragraph,
+            tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.paragraph_tooltip', { modifierKey }),
           },
         ],
       })
@@ -98,7 +105,7 @@ export default class ProseMirrorMenu extends Component {
       CommandButton.component({
         type: 'quote',
         icon: 'fas fa-quote-left',
-        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.quote_tooltip'),
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.quote_tooltip', { modifierKey }),
         state: state,
         command: wrapIn(state.getSchema().nodes.blockquote),
       })
@@ -109,7 +116,7 @@ export default class ProseMirrorMenu extends Component {
       MarkButton.component({
         type: 'code',
         icon: 'fas fa-code',
-        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.code_tooltip'),
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.code_tooltip', { modifierKey }),
         state: state,
         mark: state.getSchema().marks.code,
       })
@@ -142,7 +149,7 @@ export default class ProseMirrorMenu extends Component {
       ListButton.component({
         type: 'unordered_list',
         icon: 'fas fa-list-ul',
-        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.unordered_list_tooltip'),
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.unordered_list_tooltip', { modifierKey }),
         state: state,
         listType: state.getSchema().nodes.bullet_list,
       })
@@ -153,7 +160,7 @@ export default class ProseMirrorMenu extends Component {
       ListButton.component({
         type: 'ordered_list',
         icon: 'fas fa-list-ol',
-        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.ordered_list_tooltip'),
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.ordered_list_tooltip', { modifierKey }),
         state: state,
         listType: state.getSchema().nodes.ordered_list,
       })

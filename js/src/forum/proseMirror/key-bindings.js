@@ -24,7 +24,7 @@ export default function richTextKeymap(schema) {
         // Formatting: Wrap
         "Shift-Mod-8": toggleList(schema.nodes.bullet_list),
         "Shift-Mod-9": toggleList(schema.nodes.ordered_list),
-        "Mod->": wrapIn(schema.nodes.blockquote),
+        "Mod-q": wrapIn(schema.nodes.blockquote),
         // Formatting: Type
         "Shift-Ctrl-0": setBlockType(schema.nodes.paragraph),
         "Shift-Ctrl-1": setBlockType(schema.nodes.heading, { level: 1 }),
