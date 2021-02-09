@@ -10,10 +10,13 @@ import InsertImageDropdown from './InsertImageDropdown';
 import InsertLinkDropdown from './InsertLinkDropdown';
 import ListButton from './ListButton';
 import insertHr from '../proseMirror/commands/insertHr';
+import HiddenItemsDropdown from './HiddenItemsDropdown';
 
 export default class ProseMirrorMenu extends Component {
   oninit(vnode) {
     super.oninit(vnode);
+
+    this.modifierKey = navigator.userAgent.match(/Macintosh/) ? '⌘' : 'ctrl';
   }
   view(vnode) {
     if (!this.attrs.state) return '';
@@ -24,8 +27,7 @@ export default class ProseMirrorMenu extends Component {
   items() {
     const items = new ItemList();
     const state = this.attrs.state;
-
-    const modifierKey = navigator.userAgent.match(/Macintosh/) ? '⌘' : 'ctrl';
+    const modifierKey = this.modifierKey;
 
     items.add(
       'text_type',
@@ -102,6 +104,91 @@ export default class ProseMirrorMenu extends Component {
     );
 
     items.add(
+      'code',
+      MarkButton.component({
+        type: 'code',
+        icon: 'fas fa-code',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.code_tooltip', { modifierKey }),
+        state: state,
+        mark: state.getSchema().marks.code,
+      })
+    );
+
+    items.add(
+      'quote',
+      CommandButton.component({
+        type: 'quote',
+        icon: 'fas fa-quote-left',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.quote_tooltip', { modifierKey }),
+        state: state,
+        command: wrapIn(state.getSchema().nodes.blockquote),
+      })
+    );
+
+    items.add(
+      'link',
+      InsertLinkDropdown.component({
+        type: 'link',
+        icon: 'fas fa-link',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.link_tooltip'),
+        state: state,
+        mark: state.getSchema().marks.link,
+      })
+    );
+
+    items.add(
+      'image',
+      InsertImageDropdown.component({
+        type: 'image',
+        icon: 'fas fa-image',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.image_tooltip'),
+        state: state,
+        node: state.getSchema().nodes.image,
+      })
+    );
+
+    items.add(
+      'unordered_list',
+      ListButton.component({
+        type: 'unordered_list',
+        icon: 'fas fa-list-ul',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.unordered_list_tooltip', { modifierKey }),
+        state: state,
+        listType: state.getSchema().nodes.bullet_list,
+      })
+    );
+
+    items.add(
+      'ordered_list',
+      ListButton.component({
+        type: 'ordered_list',
+        icon: 'fas fa-list-ol',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.ordered_list_tooltip', { modifierKey }),
+        state: state,
+        listType: state.getSchema().nodes.ordered_list,
+      })
+    );
+
+    items.add(
+      'additional_items',
+      HiddenItemsDropdown.component({
+        type: 'additional_items',
+        icon: 'fas fa-plus',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.additional_items_tooltip'),
+        state: state,
+        buttons: this.hiddenItems().toArray()
+      })
+    );
+
+    return items;
+  }
+
+  hiddenItems() {
+    const items = new ItemList();
+    const state = this.attrs.state;
+    const modifierKey = this.modifierKey;
+
+    items.add(
       'strike',
       MarkButton.component({
         type: 'strike',
@@ -135,39 +222,6 @@ export default class ProseMirrorMenu extends Component {
     );
 
     items.add(
-      'code',
-      MarkButton.component({
-        type: 'code',
-        icon: 'fas fa-code',
-        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.code_tooltip', { modifierKey }),
-        state: state,
-        mark: state.getSchema().marks.code,
-      })
-    );
-
-    items.add(
-      'quote',
-      CommandButton.component({
-        type: 'quote',
-        icon: 'fas fa-quote-left',
-        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.quote_tooltip', { modifierKey }),
-        state: state,
-        command: wrapIn(state.getSchema().nodes.blockquote),
-      })
-    );
-
-    items.add(
-      'code_block',
-      CommandButton.component({
-        type: 'code_block',
-        icon: 'fas fa-terminal',
-        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.code_block_tooltip', { modifierKey }),
-        state: state,
-        command: toggleBlockType(state.getSchema().nodes.code_block, state.getSchema().nodes.paragraph),
-      })
-    );
-
-    items.add(
       'code_block',
       CommandButton.component({
         type: 'code_block',
@@ -190,28 +244,6 @@ export default class ProseMirrorMenu extends Component {
     );
 
     items.add(
-      'link',
-      InsertLinkDropdown.component({
-        type: 'link',
-        icon: 'fas fa-link',
-        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.link_tooltip'),
-        state: state,
-        mark: state.getSchema().marks.link,
-      })
-    );
-
-    items.add(
-      'image',
-      InsertImageDropdown.component({
-        type: 'image',
-        icon: 'fas fa-image',
-        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.image_tooltip'),
-        state: state,
-        node: state.getSchema().nodes.image,
-      })
-    );
-
-    items.add(
       'horizontal_rule',
       CommandButton.component({
         type: 'horizontal_rule',
@@ -219,28 +251,6 @@ export default class ProseMirrorMenu extends Component {
         tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.horizontal_rule_tooltip'),
         state: state,
         command: insertHr(state.getSchema().nodes.horizontal_rule),
-      })
-    );
-
-    items.add(
-      'unordered_list',
-      ListButton.component({
-        type: 'unordered_list',
-        icon: 'fas fa-list-ul',
-        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.unordered_list_tooltip', { modifierKey }),
-        state: state,
-        listType: state.getSchema().nodes.bullet_list,
-      })
-    );
-
-    items.add(
-      'ordered_list',
-      ListButton.component({
-        type: 'ordered_list',
-        icon: 'fas fa-list-ol',
-        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.ordered_list_tooltip', { modifierKey }),
-        state: state,
-        listType: state.getSchema().nodes.ordered_list,
       })
     );
 
