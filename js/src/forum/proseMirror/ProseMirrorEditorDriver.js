@@ -24,10 +24,10 @@ export default class ProseMirrorEditorDriver {
 
   build(target, attrs) {
     this.attrs = attrs;
-    this.schema = (new SchemaBuilder()).build();
+    this.schema = new SchemaBuilder().build();
 
-    this.parser = (new MarkdownParserBuilder(this.schema)).build();
-    this.serializer = (new MarkdownSerializerBuilder()).build();
+    this.parser = new MarkdownParserBuilder(this.schema).build();
+    this.serializer = new MarkdownSerializerBuilder().build();
 
     this.state = EditorState.create(this.buildEditorStateConfig());
     this.view = new EditorView(target, this.buildEditorProps());
