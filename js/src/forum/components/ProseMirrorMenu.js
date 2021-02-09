@@ -78,7 +78,8 @@ export default class ProseMirrorMenu extends Component {
             tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.paragraph_tooltip', { modifierKey }),
           },
         ],
-      })
+      }),
+      100
     );
 
     items.add(
@@ -90,6 +91,7 @@ export default class ProseMirrorMenu extends Component {
         state: state,
         mark: state.getSchema().marks.strong,
       })
+      ,90
     );
 
     items.add(
@@ -100,7 +102,8 @@ export default class ProseMirrorMenu extends Component {
         tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.italic_tooltip', { modifierKey }),
         state: state,
         mark: state.getSchema().marks.em,
-      })
+      }),
+      80
     );
 
     items.add(
@@ -111,7 +114,8 @@ export default class ProseMirrorMenu extends Component {
         tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.code_tooltip', { modifierKey }),
         state: state,
         mark: state.getSchema().marks.code,
-      })
+      }),
+      70
     );
 
     items.add(
@@ -123,6 +127,7 @@ export default class ProseMirrorMenu extends Component {
         state: state,
         command: wrapIn(state.getSchema().nodes.blockquote),
       })
+      ,60
     );
 
     items.add(
@@ -133,7 +138,8 @@ export default class ProseMirrorMenu extends Component {
         tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.link_tooltip'),
         state: state,
         mark: state.getSchema().marks.link,
-      })
+      }),
+      50
     );
 
     items.add(
@@ -144,7 +150,8 @@ export default class ProseMirrorMenu extends Component {
         tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.image_tooltip'),
         state: state,
         node: state.getSchema().nodes.image,
-      })
+      }),
+      40
     );
 
     items.add(
@@ -155,7 +162,8 @@ export default class ProseMirrorMenu extends Component {
         tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.unordered_list_tooltip', { modifierKey }),
         state: state,
         listType: state.getSchema().nodes.bullet_list,
-      })
+      }),
+      30
     );
 
     items.add(
@@ -166,7 +174,8 @@ export default class ProseMirrorMenu extends Component {
         tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.ordered_list_tooltip', { modifierKey }),
         state: state,
         listType: state.getSchema().nodes.ordered_list,
-      })
+      }),
+      20
     );
 
     items.add(
