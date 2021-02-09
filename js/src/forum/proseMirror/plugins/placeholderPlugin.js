@@ -7,18 +7,17 @@ export default function placeholderPlugin(text) {
       decorations: (state) => {
         const decorations = [];
 
-        const decorate = (node, pos, parent) => {
-          if (node.type.isBlock && node.childCount === 0 && pos === 0 && parent.childCount === 1) {
+        if (state.doc.childCount === 1) {
+          const node = state.doc.child(0);
+          if (node.type.isBlock && node.childCount === 0 && node.type == state.schema.nodes.paragraph) {
             decorations.push(
-              Decoration.node(pos, pos + node.nodeSize, {
+              Decoration.node(0, node.nodeSize, {
                 class: 'placeholder',
                 'data-before': text,
               })
             );
           }
-        };
-
-        decorate(state.doc.child(0), 0, state.doc);
+        }
 
         return DecorationSet.create(state.doc, decorations);
       },
