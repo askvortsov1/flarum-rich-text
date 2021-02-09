@@ -1,4 +1,4 @@
-import { wrapIn } from 'tiptap-commands';
+import { toggleBlockType, toggleWrap, wrapIn } from 'tiptap-commands';
 
 import Component from 'flarum/Component';
 import ItemList from 'flarum/utils/ItemList';
@@ -9,6 +9,7 @@ import NodeTypeDropdown from './NodeTypeDropdown';
 import InsertImageDropdown from './InsertImageDropdown';
 import InsertLinkDropdown from './InsertLinkDropdown';
 import ListButton from './ListButton';
+import insertHr from '../proseMirror/commands/insertHr';
 
 export default class ProseMirrorMenu extends Component {
   oninit(vnode) {
@@ -101,13 +102,35 @@ export default class ProseMirrorMenu extends Component {
     );
 
     items.add(
-      'quote',
-      CommandButton.component({
-        type: 'quote',
-        icon: 'fas fa-quote-left',
-        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.quote_tooltip', { modifierKey }),
+      'strike',
+      MarkButton.component({
+        type: 'strike',
+        icon: 'fas fa-strikethrough',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.strike_tooltip'),
         state: state,
-        command: wrapIn(state.getSchema().nodes.blockquote),
+        mark: state.getSchema().marks.strike,
+      })
+    );
+
+    items.add(
+      'sub',
+      MarkButton.component({
+        type: 'sub',
+        icon: 'fas fa-subscript',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.sub_tooltip', { modifierKey }),
+        state: state,
+        mark: state.getSchema().marks.sub,
+      })
+    );
+
+    items.add(
+      'sup',
+      MarkButton.component({
+        type: 'sup',
+        icon: 'fas fa-superscript',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.sup_tooltip', { modifierKey }),
+        state: state,
+        mark: state.getSchema().marks.sup,
       })
     );
 
@@ -119,6 +142,50 @@ export default class ProseMirrorMenu extends Component {
         tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.code_tooltip', { modifierKey }),
         state: state,
         mark: state.getSchema().marks.code,
+      })
+    );
+
+    items.add(
+      'quote',
+      CommandButton.component({
+        type: 'quote',
+        icon: 'fas fa-quote-left',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.quote_tooltip', { modifierKey }),
+        state: state,
+        command: wrapIn(state.getSchema().nodes.blockquote),
+      })
+    );
+
+    items.add(
+      'code_block',
+      CommandButton.component({
+        type: 'code_block',
+        icon: 'fas fa-terminal',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.code_block_tooltip', { modifierKey }),
+        state: state,
+        command: toggleBlockType(state.getSchema().nodes.code_block, state.getSchema().nodes.paragraph),
+      })
+    );
+
+    items.add(
+      'code_block',
+      CommandButton.component({
+        type: 'code_block',
+        icon: 'fas fa-terminal',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.code_block_tooltip', { modifierKey }),
+        state: state,
+        command: toggleBlockType(state.getSchema().nodes.code_block, state.getSchema().nodes.paragraph),
+      })
+    );
+
+    items.add(
+      'spoiler_block',
+      CommandButton.component({
+        type: 'spoiler_block',
+        icon: 'fas fa-caret-square-right',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.spoiler_block_tooltip', { modifierKey }),
+        state: state,
+        command: toggleWrap(state.getSchema().nodes.spoiler),
       })
     );
 
@@ -141,6 +208,17 @@ export default class ProseMirrorMenu extends Component {
         tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.image_tooltip'),
         state: state,
         node: state.getSchema().nodes.image,
+      })
+    );
+
+    items.add(
+      'horizontal_rule',
+      CommandButton.component({
+        type: 'horizontal_rule',
+        icon: 'fas fa-minus',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.horizontal_rule_tooltip'),
+        state: state,
+        command: insertHr(state.getSchema().nodes.horizontal_rule),
       })
     );
 

@@ -12,13 +12,19 @@ askvortsov-rich-text:
         remove_button: Remove
       bold_tooltip: Bold text <{modifierKey}-b>
       code_tooltip: Inline code <{modifierKey}-`>
+      code_block_tooltip: Insert a code block
       header_tooltip: Change to header {level} <shift-{modifierKey}-{level}>
+      horizontal_rule_tooltip: Insert horizontal rule
       image_tooltip: Add an image
       italic_tooltip: Italic text <{modifierKey}-i>
       link_tooltip: Add a link
       ordered_list_tooltip: Numbered list <shift-{modifierKey}-9>
       paragraph_tooltip: Change to paragraph <shift-{modifierKey}-0>
       quote_tooltip: Insert a quote <{modifierKey}-q>
+      spoiler_block_tooltip: Block Spoiler/Dropdown
+      strike_tooltip: Strikethrough <alt-shift-5>
+      sub_tooltip: Subscript <{modifierKey}-,>
+      sup_tooltip: Superscript <{modifierKey}-.>
       text_type_tooltip: Select Text Type
       unordered_list_tooltip: Bulleted list <shift-{modifierKey}-8>
     settings:
