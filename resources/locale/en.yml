@@ -10,6 +10,7 @@ askvortsov-rich-text:
         href_placeholder: URL
         title_placeholder: Title (shows on hover)
         remove_button: Remove
+      additional_items_tooltip: Additional Controls
       bold_tooltip: Bold text <{modifierKey}-b>
       code_tooltip: Inline code <{modifierKey}-`>
       code_block_tooltip: Insert a code block
