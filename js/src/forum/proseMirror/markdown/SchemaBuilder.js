@@ -1,6 +1,22 @@
 import { schema } from 'prosemirror-markdown';
 import { Schema } from 'prosemirror-model';
 
+
+/**
+ * COPIED FROM https://github.com/StackExchange/Stacks-Editor/blob/main/src/shared/schema.ts
+ *
+ * Creates a generic html MarkSpec for an inline html tag
+ * @param tag The name of the tag to use in the Prosemirror dom
+ */
+function genHtmlInlineMarkSpec(...tags) {
+    return {
+        toDOM() {
+            return [tags[0], 0];
+        },
+        parseDOM: tags.map((tag) => ({ tag: tag })),
+    };
+}
+
 export default class SchemaBuilder {
     buildNodes() {
         return schema.spec.nodes
@@ -12,7 +28,8 @@ export default class SchemaBuilder {
     }
 
     buildMarks() {
-        return schema.spec.marks;
+        return schema.spec.marks
+            .addBefore("strong", "strike", genHtmlInlineMarkSpec("del", "s", "strike"));
     }
 
     build() {
