@@ -53,7 +53,20 @@ export default class SchemaBuilder {
     return schema.spec.marks
       .addBefore('strong', 'strike', genHtmlInlineMarkSpec('del', 's', 'strike'))
       .addBefore('strong', 'sub', genHtmlInlineMarkSpec('sub'))
-      .addBefore('strong', 'sup', genHtmlInlineMarkSpec('sup'));
+      .addBefore('strong', 'sup', genHtmlInlineMarkSpec('sup'))
+      .addBefore('strong', 'spoiler_inline', {
+        attrs: { open: { default: true } },
+        parseDOM: [
+          {
+            tag: 'span',
+          },
+        ],
+        toDOM(node) {
+          const attrs = { class: 'spoiler' };
+
+          return ['span', attrs, 0];
+        },
+      });
   }
 
   build() {

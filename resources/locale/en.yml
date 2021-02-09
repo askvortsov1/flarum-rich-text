@@ -23,6 +23,7 @@ askvortsov-rich-text:
       paragraph_tooltip: Change to paragraph <shift-{modifierKey}-0>
       quote_tooltip: Insert a quote <{modifierKey}-q>
       spoiler_block_tooltip: Block Spoiler/Dropdown
+      spoiler_inline_tooltip: Spoiler  <{modifierKey}-;>
       strike_tooltip: Strikethrough <alt-shift-5>
       sub_tooltip: Subscript <{modifierKey}-,>
       sup_tooltip: Superscript <{modifierKey}-.>

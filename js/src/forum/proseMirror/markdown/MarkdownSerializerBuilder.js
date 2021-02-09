@@ -50,6 +50,13 @@ export default class MarkdownSerializerBuilder {
     return {
       ...defaultMarkdownSerializer.marks,
 
+      spoiler_inline: genMarkupAwareMarkConfig({
+        open: '>!',
+        close: '!<',
+        mixable: true,
+        expelEnclosingWhitespace: true,
+      }),
+
       strike: genMarkupAwareMarkConfig({
         open: '~~',
         close: '~~',

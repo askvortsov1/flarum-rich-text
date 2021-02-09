@@ -32,6 +32,7 @@ export default function richTextKeymap(schema) {
     'Alt-Shift-5': updateToggleMark(schema.marks.strike),
     'Mod-,': updateToggleMark(schema.marks.sub),
     'Mod-.': updateToggleMark(schema.marks.sup),
+    'Mod-;': updateToggleMark(schema.marks.spoiler_inline),
     // Formatting: Wrap
     'Shift-Mod-8': toggleList(schema.nodes.bullet_list),
     'Shift-Mod-9': toggleList(schema.nodes.ordered_list),

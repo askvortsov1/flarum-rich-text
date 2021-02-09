@@ -231,6 +231,17 @@ export default class ProseMirrorMenu extends Component {
     );
 
     items.add(
+      'spoiler_inline',
+      MarkButton.component({
+        type: 'spoiler_inline',
+        icon: 'fas fa-eye-slash',
+        tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.spoiler_inline_tooltip', { modifierKey }),
+        state: state,
+        mark: state.getSchema().marks.spoiler_inline,
+      })
+    );
+
+    items.add(
       'code_block',
       CommandButton.component({
         type: 'code_block',

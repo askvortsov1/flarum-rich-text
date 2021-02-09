@@ -27,7 +27,6 @@
 const exMark = 0x7c; /* | */
 
 const tokenize = (frontPriorMode) => (state, silent) => {
-  console.log('tokenize');
   if (silent) return false;
 
   const start = state.pos;
@@ -75,7 +74,6 @@ const tokenize = (frontPriorMode) => (state, silent) => {
 };
 
 const postProcess = (state, delimiters) => {
-  console.log('postProcess');
   const loneMarkers = [];
 
   for (const startDelim of delimiters) {
@@ -85,15 +83,15 @@ const postProcess = (state, delimiters) => {
     const endDelim = delimiters[startDelim.end];
 
     const tokenO = state.tokens[startDelim.token];
-    tokenO.type = 'inline_spoiler_open';
+    tokenO.type = 'spoiler_inline_open';
     tokenO.tag = 'span';
-    tokenO.attrs = [['class', 'inline_spoiler']];
+    tokenO.attrs = [['class', 'spoiler_inline']];
     tokenO.nesting = 1;
     tokenO.markup = '||';
     tokenO.content = '';
 
     const tokenC = state.tokens[endDelim.token];
-    tokenC.type = 'inline_spoiler_close';
+    tokenC.type = 'spoiler_inline_close';
     tokenC.tag = 'span';
     tokenC.nesting = -1;
     tokenC.markup = '||';
@@ -108,13 +106,13 @@ const postProcess = (state, delimiters) => {
   // like this: `|||||` -> `|` + `||` + `||`, leaving one marker at the
   // start of the sequence.
   //
-  // So, we have to move all those markers after subsequent inline_spoiler_close tags.
+  // So, we have to move all those markers after subsequent spoiler_inline_close tags.
   //
   while (loneMarkers.length) {
     const i = loneMarkers.pop();
     let j = i + 1;
 
-    while (j < state.tokens.length && state.tokens[j].type === 'inline_spoiler_close') {
+    while (j < state.tokens.length && state.tokens[j].type === 'spoiler_inline_close') {
       j++;
     }
 
@@ -129,8 +127,8 @@ const postProcess = (state, delimiters) => {
 };
 
 export default function (md, frontPriorMode = false) {
-  md.inline.ruler.before('emphasis', 'inline_spoiler', tokenize(frontPriorMode));
-  md.inline.ruler2.before('emphasis', 'inline_spoiler', (state) => {
+  md.inline.ruler.before('emphasis', 'spoiler_inline_bars', tokenize(frontPriorMode));
+  md.inline.ruler2.before('emphasis', 'spoiler_inline_bars', (state) => {
     postProcess(state, state.delimiters);
 
     if (!state.tokens_meta) return;

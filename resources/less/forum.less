@@ -101,6 +101,19 @@
             padding-bottom: 3px;
         }
     }
+
+    span.spoiler {
+        background: repeating-linear-gradient(45deg,
+            #606dbc,
+            #606dbc 5px,
+            #465298 5px,
+            #465298 10px);
+        color: @text-color;
+
+        * {
+            color: @text-color;
+        }
+    }
 }
 
 .ProseMirror-hideselection *::selection {
