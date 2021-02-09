@@ -5,3 +5,7 @@ app.initializers.add('askvortsov/flarum-rich-text', () => {
   addPreferences();
   applyEditor();
 });
+
+export * from './components';
+export * from './proseMirror';
+export * from './states';
