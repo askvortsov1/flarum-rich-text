@@ -52,6 +52,8 @@ export default class ProseMirrorEditorDriver {
 
     items.add('submit', keymap({ 'Mod-Enter': this.attrs.onsubmit }));
 
+    items.add('escape', keymap({ Escape: this.attrs.escape }));
+
     items.add('richTextKeymap', keymap(richTextKeymap(this.schema)));
 
     items.add('baseKeymap', keymap(baseKeymap));

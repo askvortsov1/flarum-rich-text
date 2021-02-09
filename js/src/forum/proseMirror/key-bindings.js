@@ -25,8 +25,6 @@ export default function richTextKeymap(schema) {
     'Mod-y': redo,
     'Mod-Shift-z': redo,
     Backspace: undoInputRule,
-    // Nav
-    Escape: selectParentNode,
     // Formatting: Marks
     'Mod-b': updateToggleMark(schema.marks.strong),
     'Mod-i': updateToggleMark(schema.marks.em),
