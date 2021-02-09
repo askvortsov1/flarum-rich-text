@@ -84,6 +84,39 @@ function blockquoteExt(options, state, startLine, endLine, silent) {
     spaceAfterMarker = false;
   }
 
+  // ! INSERTED
+  // We need to add this hack in so that inline spoilers
+  // at the start of lines don't get classified
+  // as block spoilers.
+  const spoiler = options.markup === '>!';
+  let foundExclamation = false;
+  let foundOpen = false;
+  let oldPos = pos;
+  if (spoiler) {
+    while (pos < max) {
+      ch = state.src.charCodeAt(pos);
+
+      if (foundExclamation && ch === 0x3c/* < */) {
+        return false;
+      } else if (ch === 0x3e/* > */) {
+        foundOpen = true;
+      } else if (foundOpen && ch === 0x21/* ! */) {
+        break;// Inline spoiler embedded in block spoiler, this is fine.
+      } else if (ch === 0x21/* ! */) {
+        foundExclamation = true;
+      } else if (ch === 0x0a/* \n */) {
+        break; // Not an inline comment
+      } else {
+        foundExclamation = false;
+        foundOpen = false;
+      }
+
+      pos++;
+    }
+  }
+  pos = oldPos;
+  // ! END INSERTED
+
   oldBMarks = [state.bMarks[startLine]];
   state.bMarks[startLine] = pos;
 
