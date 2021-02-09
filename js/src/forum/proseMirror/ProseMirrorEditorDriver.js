@@ -4,6 +4,7 @@ import { keymap } from 'prosemirror-keymap';
 import { EditorState, TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { dropCursor } from 'prosemirror-dropcursor';
+import { gapCursor } from 'prosemirror-gapcursor';
 
 import ItemList from 'flarum/common/utils/ItemList';
 import disabledPlugin from './plugins/disabledPlugin';
@@ -62,6 +63,8 @@ export default class ProseMirrorEditorDriver {
     items.add('disabled', disabledPlugin());
 
     items.add('dropCursor', dropCursor());
+
+    items.add('gapCursor', gapCursor());
 
     items.add('menu', menuPlugin(this.attrs.menuState));
 
