@@ -1,5 +1,5 @@
 import { inputRules, wrappingInputRule, textblockTypeInputRule, emDash, ellipsis } from "prosemirror-inputrules";
-import { markInputRule } from 'tiptap-commands';
+import { markInputRule, nodeInputRule } from 'tiptap-commands';
 
 
 // Copied from https://github.com/ProseMirror/prosemirror-example-setup/blob/master/src/inputrules.js
@@ -30,20 +30,21 @@ function blockSpoilerRule(nodeType) {
     return wrappingInputRule(/^\s*>!\s$/, nodeType)
 }
 
+
 export default function buildInputRules(schema) {
     const rules = [
         ellipsis,
-        emDash,
         blockQuoteRule(schema.nodes.blockquote),
         orderedListRule(schema.nodes.ordered_list),
         bulletListRule(schema.nodes.bullet_list),
         codeBlockRule(schema.nodes.code_block),
         headingRule(schema.nodes.heading, 6),
+        blockSpoilerRule(schema.nodes.spoiler),
+        nodeInputRule(/(?:___\s|\*\*\*\s|---)$/, schema.nodes.horizontal_rule),
         markInputRule(/(?:\*\*|__)([^\*_]+)(?:\*\*|__)$/, schema.marks.strong),
         markInputRule(/(?:^|[^\*_])(?:\*|_)([^\*_]+)(?:\*|_)$/, schema.marks.em),
         markInputRule(/(?:`)([^`]+)(?:`)$/, schema.marks.code),
         markInputRule(/(?:~~)([^~]+)(?:~~)$/, schema.marks.strike),
-        blockSpoilerRule(schema.nodes.spoiler),
     ];
 
     return inputRules({ rules })
