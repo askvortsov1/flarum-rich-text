@@ -26,6 +26,10 @@ function headingRule(nodeType, maxLevel) {
         nodeType, match => ({ level: match[1].length }))
 }
 
+function blockSpoilerRule(nodeType) {
+    return wrappingInputRule(/^\s*>!\s$/, nodeType)
+}
+
 export default function buildInputRules(schema) {
     const rules = [
         ellipsis,
@@ -39,6 +43,7 @@ export default function buildInputRules(schema) {
         markInputRule(/(?:^|[^\*_])(?:\*|_)([^\*_]+)(?:\*|_)$/, schema.marks.em),
         markInputRule(/(?:`)([^`]+)(?:`)$/, schema.marks.code),
         markInputRule(/(?:~~)([^~]+)(?:~~)$/, schema.marks.strike),
+        blockSpoilerRule(schema.nodes.spoiler),
     ];
 
     return inputRules({ rules })

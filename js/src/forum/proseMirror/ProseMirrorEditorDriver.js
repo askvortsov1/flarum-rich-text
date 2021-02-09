@@ -9,6 +9,7 @@ import ItemList from 'flarum/common/utils/ItemList';
 import disabledPlugin from './plugins/disabledPlugin';
 import placeholderPlugin from './plugins/placeholderPlugin';
 import menuPlugin from './plugins/menuPlugin';
+import toggleSpoiler from './plugins/toggleSpoiler';
 import richTextKeymap from './key-bindings';
 import buildInputRules from './inputrules';
 import MarkdownSerializerBuilder from './markdown/MarkdownSerializerBuilder';
@@ -63,6 +64,8 @@ export default class ProseMirrorEditorDriver {
     items.add('dropCursor', dropCursor());
 
     items.add('menu', menuPlugin(this.attrs.menuState));
+
+    items.add('toggleSpoiler', toggleSpoiler(this.schema));
 
     return items;
   }

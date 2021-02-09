@@ -82,6 +82,25 @@
     li p {
         margin: 0;
     }
+
+    details {
+        font-size: inherit;
+        border: 0;
+        background: lighten(@control-bg, 3%);
+        color: @control-color;
+        border-radius: @border-radius;
+        padding: 3px 15px;
+        margin: 1em 0;
+
+        p {
+            margin-bottom: 0;
+            padding-bottom: 1em;
+        }
+
+        p:last-child {
+            padding-bottom: 3px;
+        }
+    }
 }
 
 .ProseMirror-hideselection *::selection {

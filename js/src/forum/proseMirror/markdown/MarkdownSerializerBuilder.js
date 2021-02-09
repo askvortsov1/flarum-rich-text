@@ -40,14 +40,19 @@ function genMarkupAwareMarkConfig(config) {
 
 export default class MarkdownSerializerBuilder {
     buildNodes() {
-        return defaultMarkdownSerializer.nodes;
+        return {
+            ...defaultMarkdownSerializer.nodes,
+
+            spoiler(state, node) {
+                state.wrapBlock(">! ", null, node, () => state.renderContent(node));
+            },
+        };
     }
 
     buildMarks() {
         return {
             ...defaultMarkdownSerializer.marks,
 
-            // add support for the strike mark
             strike: genMarkupAwareMarkConfig({
                 open: "~~",
                 close: "~~",

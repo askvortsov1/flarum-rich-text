@@ -17,6 +17,28 @@ function genHtmlInlineMarkSpec(...tags) {
     };
 }
 
+const spoilerNodeSpec = {
+    content: "block+",
+    group: "block",
+    attrs: { open: { default: true } },
+    parseDOM: [
+        {
+            tag: "details"
+        },
+    ],
+    toDOM(node) {
+        const attrs = { class: "spoiler" };
+
+        if (node.attrs.open) attrs.open = true;
+
+        return [
+            "details",
+            attrs,
+            0,
+        ];
+    },
+};
+
 export default class SchemaBuilder {
     buildNodes() {
         return schema.spec.nodes
@@ -24,12 +46,14 @@ export default class SchemaBuilder {
             .update("ordered_list", Object.assign({}, schema.spec.nodes.get("ordered_list"),
                 { attrs: { order: { default: 1 }, tight: { default: true } } }))
             .update("bullet_list", Object.assign({}, schema.spec.nodes.get("bullet_list"),
-                { attrs: { tight: { default: true } } }));
+                { attrs: { tight: { default: true } } }))
+
+            .addBefore("blockquote", "spoiler", spoilerNodeSpec);
     }
 
     buildMarks() {
         return schema.spec.marks
-            .addBefore("strong", "strike", genHtmlInlineMarkSpec("del", "s", "strike"));
+            .addBefore("strong", "strike", genHtmlInlineMarkSpec("del", "s", "strike"))
     }
 
     build() {

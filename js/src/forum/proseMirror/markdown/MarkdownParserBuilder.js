@@ -1,6 +1,8 @@
 
 import markdownit from "markdown-it";
 import { defaultMarkdownParser, MarkdownParser } from "prosemirror-markdown";
+import blockSpoiler from "./markdown-it/blockSpoiler";
+
 
 export default class MarkdownParserBuilder {
     constructor(schema) {
@@ -13,7 +15,8 @@ export default class MarkdownParserBuilder {
 
     buildTokenizer() {
         return markdownit("commonmark", this.tokenizerParams())
-            .enable('strikethrough');
+            .enable('strikethrough')
+            .use(blockSpoiler);
     }
 
     buildTokens() {
@@ -23,6 +26,10 @@ export default class MarkdownParserBuilder {
             // add support for the strike mark
             s: {
                 mark: "strike",
+            },
+
+            spoiler: {
+                block: "spoiler",
             },
         };
     }
