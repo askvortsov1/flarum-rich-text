@@ -3,7 +3,7 @@ import icon from 'flarum/common/helpers/icon';
 
 export default class HiddenItemsDropdown extends Dropdown {
   static initAttrs(attrs) {
-    attrs.buttonClassName = 'Button Button--icon Button--link';
+    attrs.buttonClassName = 'Button Button--icon Button--link Button--menuDropdown';
   }
 
   oninit(vnode) {
