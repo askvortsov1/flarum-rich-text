@@ -90,8 +90,8 @@ export default class ProseMirrorMenu extends Component {
         tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.bold_tooltip', { modifierKey }),
         state: state,
         mark: state.getSchema().marks.strong,
-      })
-      ,90
+      }),
+      90
     );
 
     items.add(
@@ -126,8 +126,8 @@ export default class ProseMirrorMenu extends Component {
         tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.quote_tooltip', { modifierKey }),
         state: state,
         command: wrapIn(state.getSchema().nodes.blockquote),
-      })
-      ,60
+      }),
+      60
     );
 
     items.add(
@@ -185,7 +185,7 @@ export default class ProseMirrorMenu extends Component {
         icon: 'fas fa-plus',
         tooltip: app.translator.trans('askvortsov-rich-text.forum.composer.additional_items_tooltip'),
         state: state,
-        buttons: this.hiddenItems().toArray()
+        buttons: this.hiddenItems().toArray(),
       })
     );
 

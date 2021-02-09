@@ -96,15 +96,15 @@ function blockquoteExt(options, state, startLine, endLine, silent) {
     while (pos < max) {
       ch = state.src.charCodeAt(pos);
 
-      if (foundExclamation && ch === 0x3c/* < */) {
+      if (foundExclamation && ch === 0x3c /* < */) {
         return false;
-      } else if (ch === 0x3e/* > */) {
+      } else if (ch === 0x3e /* > */) {
         foundOpen = true;
-      } else if (foundOpen && ch === 0x21/* ! */) {
-        break;// Inline spoiler embedded in block spoiler, this is fine.
-      } else if (ch === 0x21/* ! */) {
+      } else if (foundOpen && ch === 0x21 /* ! */) {
+        break; // Inline spoiler embedded in block spoiler, this is fine.
+      } else if (ch === 0x21 /* ! */) {
         foundExclamation = true;
-      } else if (ch === 0x0a/* \n */) {
+      } else if (ch === 0x0a /* \n */) {
         break; // Not an inline comment
       } else {
         foundExclamation = false;

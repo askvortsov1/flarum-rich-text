@@ -42,7 +42,7 @@ export default class MarkdownSerializerBuilder {
 
       spoiler(state, node) {
         state.wrapBlock('>! ', null, node, () => state.renderContent(node));
-      }
+      },
     };
   }
 

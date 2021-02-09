@@ -27,10 +27,6 @@ export default class HiddenItemsDropdown extends Dropdown {
   }
 
   getMenu(items) {
-    return (
-      <ul className={'Dropdown-menu dropdown-menu HiddenItemsDropdownMenu'}>
-        {this.attrs.buttons}
-      </ul>
-    );
+    return <ul className={'Dropdown-menu dropdown-menu HiddenItemsDropdownMenu'}>{this.attrs.buttons}</ul>;
   }
 }

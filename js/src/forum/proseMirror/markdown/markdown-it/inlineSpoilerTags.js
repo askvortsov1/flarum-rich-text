@@ -4,10 +4,10 @@ const tokenize = (frontPriorMode) => (state, silent) => {
   if (silent) return false;
 
   var scanned,
-      max = state.posMax,
-      start = state.pos;
+    max = state.posMax,
+    start = state.pos;
 
-  if (state.src.charCodeAt(start) === 0x3e/* > */ && start + 3 <= max && state.src.charCodeAt(start + 1) === 0x21/* ! */) {
+  if (state.src.charCodeAt(start) === 0x3e /* > */ && start + 3 <= max && state.src.charCodeAt(start + 1) === 0x21 /* ! */) {
     scanned = state.scanDelims(state.pos, true);
     state.push('text', '', 0);
     state.delimiters.push({
@@ -17,14 +17,13 @@ const tokenize = (frontPriorMode) => (state, silent) => {
       token: state.tokens.length - 1,
       end: -1,
       open: true,
-      close: false
+      close: false,
     });
     state.pos += 2;
     return true;
   }
 
-
-  if (state.src.charCodeAt(start) === 0x21/* ! */ && start + 2 <= max && state.src.charCodeAt(start + 1) === 0x3c/* < */) {
+  if (state.src.charCodeAt(start) === 0x21 /* ! */ && start + 2 <= max && state.src.charCodeAt(start + 1) === 0x3c /* < */) {
     state.push('text', '', 0);
     state.delimiters.push({
       marker: '>!<',
@@ -33,7 +32,7 @@ const tokenize = (frontPriorMode) => (state, silent) => {
       token: state.tokens.length - 1,
       end: -1,
       open: false,
-      close: true
+      close: true,
     });
     state.pos += 2;
     return true;
@@ -71,7 +70,7 @@ function postProcess(state, delimiters) {
     token.content = '';
 
     token = state.tokens[endDelim.token];
-    token.type =  'spoiler_inline_close';
+    token.type = 'spoiler_inline_close';
     // token.tag = isStrong ? 'strong' : 'em';
     token.nesting = -1;
     token.markup = '!<';

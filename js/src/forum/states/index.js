@@ -1,5 +1,5 @@
-import MenuState from "./MenuState";
+import MenuState from './MenuState';
 
 export const states = {
-    MenuState: MenuState
-}
+  MenuState: MenuState,
+};
