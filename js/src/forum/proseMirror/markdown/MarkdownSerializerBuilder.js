@@ -32,13 +32,17 @@ function genMarkupAwareMarkConfig(config) {
 }
 
 export default class MarkdownSerializerBuilder {
+  constructor(schema) {
+    this.schema = schema;
+  }
+
   buildNodes() {
     return {
       ...defaultMarkdownSerializer.nodes,
 
       spoiler(state, node) {
         state.wrapBlock('>! ', null, node, () => state.renderContent(node));
-      },
+      }
     };
   }
 
