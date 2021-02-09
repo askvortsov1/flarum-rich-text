@@ -54,6 +54,8 @@ export default class SchemaBuilder {
     buildMarks() {
         return schema.spec.marks
             .addBefore("strong", "strike", genHtmlInlineMarkSpec("del", "s", "strike"))
+            .addBefore("strong", "sub", genHtmlInlineMarkSpec("sub"))
+            .addBefore("strong", "sup", genHtmlInlineMarkSpec("sup"));
     }
 
     build() {

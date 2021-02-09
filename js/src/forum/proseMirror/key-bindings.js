@@ -21,6 +21,8 @@ export default function richTextKeymap(schema) {
         "Mod-b": updateToggleMark(schema.marks.strong),
         "Mod-i": updateToggleMark(schema.marks.em),
         "Mod-`": updateToggleMark(schema.marks.code),
+        "Mod-.": updateToggleMark(schema.marks.sub),
+        "Mod-,": updateToggleMark(schema.marks.sup),
         // Formatting: Wrap
         "Shift-Mod-8": toggleList(schema.nodes.bullet_list),
         "Shift-Mod-9": toggleList(schema.nodes.ordered_list),

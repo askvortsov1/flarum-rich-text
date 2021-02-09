@@ -45,6 +45,8 @@ export default function buildInputRules(schema) {
         markInputRule(/(?:^|[^\*_])(?:\*|_)([^\*_]+)(?:\*|_)$/, schema.marks.em),
         markInputRule(/(?:`)([^`]+)(?:`)$/, schema.marks.code),
         markInputRule(/(?:~~)([^~]+)(?:~~)$/, schema.marks.strike),
+        markInputRule(/(?:[^~]~)([^~]+)(?:~)$/, schema.marks.sub),
+        markInputRule(/(?:\^)([^^]+)(?:\^)$/, schema.marks.sup),
     ];
 
     return inputRules({ rules })

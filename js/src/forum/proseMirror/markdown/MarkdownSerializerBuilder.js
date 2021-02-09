@@ -59,6 +59,20 @@ export default class MarkdownSerializerBuilder {
                 mixable: true,
                 expelEnclosingWhitespace: true,
             }),
+
+            sub: genMarkupAwareMarkConfig({
+                open: "~",
+                close: "~",
+                mixable: true,
+                expelEnclosingWhitespace: true,
+            }),
+
+            sup: genMarkupAwareMarkConfig({
+                open: "^",
+                close: "^",
+                mixable: true,
+                expelEnclosingWhitespace: true,
+            }),
         };
     }
 
