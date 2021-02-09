@@ -9,3 +9,5 @@ app.initializers.add('askvortsov/flarum-rich-text', () => {
 export * from './components';
 export * from './proseMirror';
 export * from './states';
+export { keymap } from 'prosemirror-keymap';
+export { Selection } from 'prosemirror-state';
