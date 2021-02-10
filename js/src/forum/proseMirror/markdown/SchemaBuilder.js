@@ -72,23 +72,22 @@ export default class SchemaBuilder {
         attrs: { open: { default: true } },
         parseDOM: [
           {
-            tag: 'span',
+            tag: 'spoiler',
           },
         ],
         toDOM(node) {
-          const attrs = { class: 'spoiler' };
 
-          return ['span', attrs, 0];
+          return ['spoiler', 0];
         },
       })
       .addBefore('strong', 'math_inline', {
         parseDOM: [
           {
-            tag: 'span',
+            tag: 'math',
           },
         ],
         toDOM(node) {
-          return ['span', { class: 'math' }, 0];
+          return ['math', 0];
         },
         excludes: '_',
       });
