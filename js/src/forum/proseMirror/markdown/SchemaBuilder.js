@@ -35,17 +35,16 @@ const spoilerNodeSpec = {
 };
 
 const mathBlockNodeSpec = {
-  content: "text*",
+  content: 'text*',
   code: true,
   group: 'block',
   parseDOM: [
     {
-      tag: "pre",
+      tag: 'pre',
     },
   ],
   toDOM(node) {
-
-    return ["pre", { class: 'math' }, ["code", 0]];
+    return ['pre', { class: 'math' }, ['code', 0]];
   },
 };
 
@@ -91,7 +90,7 @@ export default class SchemaBuilder {
         toDOM(node) {
           return ['span', { class: 'math' }, 0];
         },
-        excludes: "_"
+        excludes: '_',
       });
   }
 

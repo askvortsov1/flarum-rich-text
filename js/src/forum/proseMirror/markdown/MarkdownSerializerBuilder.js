@@ -45,11 +45,11 @@ export default class MarkdownSerializerBuilder {
       },
 
       math_block(state, node) {
-        state.write("$$\n")
-        state.text(node.textContent, false)
-        state.ensureNewLine()
-        state.write("$$")
-        state.closeBlock(node)
+        state.write('$$\n');
+        state.text(node.textContent, false);
+        state.ensureNewLine();
+        state.write('$$');
+        state.closeBlock(node);
       },
     };
   }

@@ -55,12 +55,14 @@ export default class MarkdownParserBuilder {
       },
 
       math_block: {
-        block: 'math_block', noCloseToken: true
+        block: 'math_block',
+        noCloseToken: true,
       },
 
       math_inline: {
-        mark: 'math_inline', noCloseToken: true
-      }
+        mark: 'math_inline',
+        noCloseToken: true,
+      },
     };
   }
 

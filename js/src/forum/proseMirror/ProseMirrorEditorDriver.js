@@ -35,9 +35,8 @@ export default class ProseMirrorEditorDriver {
     const cssClasses = attrs.classNames || [];
     cssClasses.forEach((className) => this.view.dom.classList.add(className));
 
-
     const callInputListeners = (e) => {
-      this.attrs.inputListeners.forEach(listener => {
+      this.attrs.inputListeners.forEach((listener) => {
         listener.call(target);
       });
 
