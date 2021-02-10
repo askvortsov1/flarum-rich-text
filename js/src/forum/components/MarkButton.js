@@ -1,9 +1,9 @@
+import { toggleMark } from 'tiptap-commands';
 import CommandButton from './CommandButton';
-import updateToggleMark from '../proseMirror/commands/updateToggleMark';
 
 export default class MarkButton extends CommandButton {
   static initAttrs(attrs) {
-    attrs.command = updateToggleMark(attrs.mark);
+    attrs.command = toggleMark(attrs.mark);
   }
 
   onEditorUpdate() {

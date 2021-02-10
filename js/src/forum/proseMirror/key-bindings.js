@@ -4,14 +4,13 @@ import {
   chainCommands,
   exitCode,
   liftListItem,
-  selectParentNode,
   setBlockType,
   sinkListItem,
   splitListItem,
   toggleList,
+  toggleMark,
   wrapIn,
 } from 'tiptap-commands';
-import updateToggleMark from './commands/updateToggleMark';
 
 export default function richTextKeymap(schema) {
   const exitBlockCommand = chainCommands(exitCode, (state, dispatch) => {
@@ -26,13 +25,13 @@ export default function richTextKeymap(schema) {
     'Mod-Shift-z': redo,
     Backspace: undoInputRule,
     // Formatting: Marks
-    'Mod-b': updateToggleMark(schema.marks.strong),
-    'Mod-i': updateToggleMark(schema.marks.em),
-    'Mod-`': updateToggleMark(schema.marks.code),
-    'Alt-Shift-5': updateToggleMark(schema.marks.strike),
-    'Mod-,': updateToggleMark(schema.marks.sub),
-    'Mod-.': updateToggleMark(schema.marks.sup),
-    'Mod-;': updateToggleMark(schema.marks.spoiler_inline),
+    'Mod-b': toggleMark(schema.marks.strong),
+    'Mod-i': toggleMark(schema.marks.em),
+    'Mod-`': toggleMark(schema.marks.code),
+    'Alt-Shift-5': toggleMark(schema.marks.strike),
+    'Mod-,': toggleMark(schema.marks.sub),
+    'Mod-.': toggleMark(schema.marks.sup),
+    'Mod-;': toggleMark(schema.marks.spoiler_inline),
     // Formatting: Wrap
     'Shift-Mod-8': toggleList(schema.nodes.bullet_list),
     'Shift-Mod-9': toggleList(schema.nodes.ordered_list),
