@@ -1,6 +1,7 @@
 import markdownit from 'markdown-it';
 import subPlugin from 'markdown-it-sub';
 import supPlugin from 'markdown-it-sup';
+import latexPlugin from 'markdown-it-latex2img';
 import { defaultMarkdownParser, MarkdownParser } from 'prosemirror-markdown';
 import altText from './markdown-it/altText';
 import blockSpoiler from './markdown-it/blockSpoiler';
@@ -21,6 +22,7 @@ export default class MarkdownParserBuilder {
       .enable('strikethrough')
       .use(altText)
       .use(blockSpoiler)
+      .use(latexPlugin)
       .use(subPlugin)
       .use(supPlugin)
       .use(inlineSpoilerBars)
@@ -51,6 +53,14 @@ export default class MarkdownParserBuilder {
       sup: {
         mark: 'sup',
       },
+
+      math_block: {
+        block: 'math_block', noCloseToken: true
+      },
+
+      math_inline: {
+        mark: 'math_inline', noCloseToken: true
+      }
     };
   }
 

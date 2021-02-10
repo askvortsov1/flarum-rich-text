@@ -43,6 +43,14 @@ export default class MarkdownSerializerBuilder {
       spoiler(state, node) {
         state.wrapBlock('>! ', null, node, () => state.renderContent(node));
       },
+
+      math_block(state, node) {
+        state.write("$$\n")
+        state.text(node.textContent, false)
+        state.ensureNewLine()
+        state.write("$$")
+        state.closeBlock(node)
+      },
     };
   }
 
@@ -77,6 +85,16 @@ export default class MarkdownSerializerBuilder {
         mixable: true,
         expelEnclosingWhitespace: true,
       }),
+
+      math_inline: {
+        ...genMarkupAwareMarkConfig({
+          open: '$',
+          close: '$',
+          mixable: false,
+          expelEnclosingWhitespace: true,
+        }),
+        escape: false,
+      },
     };
   }
 

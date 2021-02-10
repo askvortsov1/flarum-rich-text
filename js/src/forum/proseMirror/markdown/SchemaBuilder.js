@@ -34,6 +34,21 @@ const spoilerNodeSpec = {
   },
 };
 
+const mathBlockNodeSpec = {
+  content: "text*",
+  code: true,
+  group: 'block',
+  parseDOM: [
+    {
+      tag: "pre",
+    },
+  ],
+  toDOM(node) {
+
+    return ["pre", { class: 'math' }, ["code", 0]];
+  },
+};
+
 export default class SchemaBuilder {
   buildNodes() {
     return (
@@ -44,8 +59,8 @@ export default class SchemaBuilder {
           Object.assign({}, schema.spec.nodes.get('ordered_list'), { attrs: { order: { default: 1 }, tight: { default: true } } })
         )
         .update('bullet_list', Object.assign({}, schema.spec.nodes.get('bullet_list'), { attrs: { tight: { default: true } } }))
-
         .addBefore('blockquote', 'spoiler', spoilerNodeSpec)
+        .addBefore('blockquote', 'math_block', mathBlockNodeSpec)
     );
   }
 
@@ -66,6 +81,17 @@ export default class SchemaBuilder {
 
           return ['span', attrs, 0];
         },
+      })
+      .addBefore('strong', 'math_inline', {
+        parseDOM: [
+          {
+            tag: 'span',
+          },
+        ],
+        toDOM(node) {
+          return ['span', { class: 'math' }, 0];
+        },
+        excludes: "_"
       });
   }
 

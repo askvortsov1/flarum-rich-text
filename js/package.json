@@ -5,6 +5,7 @@
   "dependencies": {
     "flarum-webpack-config": "^0.1.0-beta.10",
     "markdown-it": "^10.0.0",
+    "markdown-it-latex2img": "0.0.6",
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
     "prosemirror-dropcursor": "^1.0.0",

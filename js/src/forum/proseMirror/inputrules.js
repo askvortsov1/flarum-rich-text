@@ -42,6 +42,7 @@ export default function buildInputRules(schema) {
     headingRule(schema.nodes.heading, 6),
     blockSpoilerRule(schema.nodes.spoiler),
     nodeInputRule(/(?:___\s|\*\*\*\s|---)$/, schema.nodes.horizontal_rule),
+    textblockTypeInputRule(/^\s*\$\$\s$/, schema.nodes.math_block),
     markInputRule(/(?:\*\*|__)([^\*_]+)(?:\*\*|__)$/, schema.marks.strong),
     markInputRule(/(?:^|[^\*_])(?:\*|_)([^\*_]+)(?:\*|_)$/, schema.marks.em),
     markInputRule(/(?:`)([^`]+)(?:`)$/, schema.marks.code),
@@ -50,6 +51,7 @@ export default function buildInputRules(schema) {
     markInputRule(/(?:\^)([^^]+)(?:\^)$/, schema.marks.sup),
     markInputRule(/(?:\|\|)([^\|]+)(?:\|\|)$/, schema.marks.spoiler_inline),
     markInputRule(/(?:>!)(.+)(?:!<)$/, schema.marks.spoiler_inline),
+    markInputRule(/(?:\$)([^$]+)(?:\$)$/, schema.marks.math_inline),
   ];
 
   return inputRules({ rules });

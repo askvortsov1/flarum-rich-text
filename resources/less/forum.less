@@ -114,6 +114,32 @@
             color: @text-color;
         }
     }
+
+    span.math {
+        font-family: source-code-pro, Monaco, Consolas, "Courier New", monospace;
+        padding: 5px;
+        background: @code-bg;
+        color: @code-color;
+        line-height: 1.3;
+        font-size: 90%;
+        border-radius: 4px;
+
+        &::before,&::after  {
+            content: '$';
+        }
+    }
+
+    pre.math {
+        &::before {
+            content: '$$ (LaTeX)';
+            display: block;
+        }
+
+        &::after {
+            content: '$$';
+            display: block;
+        }
+    }
 }
 
 .ProseMirror-hideselection *::selection {
