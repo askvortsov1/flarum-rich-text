@@ -1,4 +1,4 @@
-import { defaultMarkdownSerializer, MarkdownSerializer } from 'prosemirror-markdown';
+import { defaultMarkdownSerializer, MarkdownSerializer, MarkdownSerializerState } from 'prosemirror-markdown';
 
 /**
  * COPIED FROM https://github.com/StackExchange/Stacks-Editor/blob/main/src/rich-text/markdown-serializer.ts
@@ -30,6 +30,12 @@ function genMarkupAwareMarkConfig(config) {
     },
   };
 }
+
+MarkdownSerializerState.prototype.esc = function (str, startOfLine) {
+  str = str.replace(/[`*\\~]/g, "\\$&");
+  if (startOfLine) str = str.replace(/^[:#\-*+]/, "\\$&").replace(/^(\s*\d+)\./, "$1\\.");
+  return str;
+};
 
 export default class MarkdownSerializerBuilder {
   constructor(schema) {
