@@ -1,7 +1,7 @@
 import { baseKeymap } from 'tiptap-commands';
 import { history } from 'prosemirror-history';
 import { keymap } from 'prosemirror-keymap';
-import { EditorState, TextSelection } from 'prosemirror-state';
+import { EditorState, Selection, TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { dropCursor } from 'prosemirror-dropcursor';
 import { gapCursor } from 'prosemirror-gapcursor';
@@ -178,14 +178,20 @@ export default class ProseMirrorEditorDriver {
     if (escape) {
       transaction = this.view.state.tr.insertText(text, start, end);
     } else {
-      transaction = this.view.state.tr.insert(start, this.parseInitialValue(text));
+      start -= 1;
+      transaction = this.view.state.tr.replaceRangeWith(start, end, this.parseInitialValue(text));
     }
 
     this.view.dispatch(transaction);
-    $(this.view.dom).click();
 
     // Move the textarea cursor to the end of the content we just inserted.
-    this.moveCursorTo(start + text.length);
+    this.moveCursorTo(Math.min(start + text.length, Selection.atEnd(this.view.state.doc).to));
+    m.redraw();
+
+    // TODO: accomplish this in one step.
+    if (text.endsWith(" ") && !escape) {
+      this.insertAtCursor(" ");
+    }
   }
 
   /**
