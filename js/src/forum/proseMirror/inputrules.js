@@ -54,5 +54,5 @@ export default function buildInputRules(schema) {
     markInputRule(/(?:\$)([^$]+)(?:\$)$/, schema.marks.math_inline),
   ];
 
-  return inputRules({ rules });
+  return rules;
 }

@@ -16,6 +16,7 @@ import buildInputRules from './inputrules';
 import MarkdownSerializerBuilder from './markdown/MarkdownSerializerBuilder';
 import MarkdownParserBuilder from './markdown/MarkdownParserBuilder';
 import SchemaBuilder from './markdown/SchemaBuilder';
+import { inputRules } from 'prosemirror-inputrules';
 
 export default class ProseMirrorEditorDriver {
   constructor(target, attrs) {
@@ -60,7 +61,7 @@ export default class ProseMirrorEditorDriver {
   buildPluginItems() {
     const items = new ItemList();
 
-    items.add('markdownInputrules', buildInputRules(this.schema));
+    items.add('markdownInputrules', inputRules({rules: this.buildInputRules(this.schema)}));
 
     items.add('submit', keymap({ 'Mod-Enter': this.attrs.onsubmit }));
 
@@ -101,6 +102,10 @@ export default class ProseMirrorEditorDriver {
         self.attrs.oninput(newDocPlaintext);
       },
     };
+  }
+
+  buildInputRules(schema) {
+    return buildInputRules(schema);
   }
 
   parseInitialValue(text) {
