@@ -10,4 +10,4 @@ export * from './components';
 export * from './proseMirror';
 export * from './states';
 export { keymap } from 'prosemirror-keymap';
-export { Selection } from 'prosemirror-state';
+export { Plugin, Selection } from 'prosemirror-state';
