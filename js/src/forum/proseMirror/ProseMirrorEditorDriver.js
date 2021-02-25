@@ -229,7 +229,7 @@ export default class ProseMirrorEditorDriver {
     const editorViewportOffset = this.view.dom.getBoundingClientRect();
     return {
       left: viewportCoords.left - editorViewportOffset.left,
-      top: viewportCoords.top - editorViewportOffset.top + this.view.dom.scrollTop,
+      top: viewportCoords.top - editorViewportOffset.top,
     };
   }
 
