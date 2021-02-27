@@ -39,8 +39,9 @@ export default class NodeTypeDropdown extends Dropdown {
           .map((option) => (
             <button
               className="Button Button--icon Button--link NodeTypeButton"
+              key={option.title}
               title={extractText(option.tooltip)}
-              data-toggle="tooltip"
+              oncreate={(vnode) => $(vnode.dom).tooltip()}
               onclick={this.click.bind(this, option.type, option.attrs)}
               onkeydown={this.keydown.bind(this, option.type, option.attrs)}
             >
