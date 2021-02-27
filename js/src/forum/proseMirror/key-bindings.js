@@ -8,6 +8,15 @@ export default function richTextKeymap(schema) {
     return true;
   });
 
+  const handleEnter = (state, dispatch) => {
+    const emojiDropdown = $('.EmojiDropdown:visible');
+    const mentionsDropdown = $('.MentionsDropdown:visible');
+
+    if (emojiDropdown[0] || mentionsDropdown[0]) return true;
+
+    return splitListItem(schema.nodes.list_item)(state, dispatch);
+  };
+
   return {
     // History
     'Mod-z': undo,
@@ -40,7 +49,7 @@ export default function richTextKeymap(schema) {
     'Mod-m': sinkListItem(schema.nodes.list_item),
     'Mod-[': liftListItem(schema.nodes.list_item),
     'Mod-Shift-m': liftListItem(schema.nodes.list_item),
-    Enter: splitListItem(schema.nodes.list_item),
+    Enter: handleEnter,
     'Shift-Enter': exitBlockCommand,
   };
 }
