@@ -23,6 +23,7 @@
     "webpack-cli": "^3.0.7"
   },
   "devDependencies": {
+    "husky": "^4.2.5",
     "prettier": "2.0.2"
   },
   "scripts": {
@@ -30,5 +31,10 @@
     "build": "webpack --mode production",
     "format": "prettier --write src",
     "format-check": "prettier --check src"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format"
+    }
   }
 }
