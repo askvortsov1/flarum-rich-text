@@ -1,16 +1,6 @@
 import { redo, undo } from 'prosemirror-history';
 import { undoInputRule } from 'prosemirror-inputrules';
-import {
-  chainCommands,
-  exitCode,
-  liftListItem,
-  setBlockType,
-  sinkListItem,
-  splitListItem,
-  toggleList,
-  toggleMark,
-  wrapIn,
-} from 'tiptap-commands';
+import { chainCommands, exitCode, liftListItem, setBlockType, sinkListItem, splitListItem, toggleList, toggleMark, wrapIn } from 'tiptap-commands';
 
 export default function richTextKeymap(schema) {
   const exitBlockCommand = chainCommands(exitCode, (state, dispatch) => {

@@ -61,7 +61,7 @@ export default class ProseMirrorEditorDriver {
   buildPluginItems() {
     const items = new ItemList();
 
-    items.add('markdownInputrules', inputRules({rules: this.buildInputRules(this.schema)}));
+    items.add('markdownInputrules', inputRules({ rules: this.buildInputRules(this.schema) }));
 
     items.add('submit', keymap({ 'Mod-Enter': this.attrs.onsubmit }));
 
@@ -194,8 +194,8 @@ export default class ProseMirrorEditorDriver {
     m.redraw();
 
     // TODO: accomplish this in one step.
-    if (text.endsWith(" ") && !escape) {
-      this.insertAtCursor(" ");
+    if (text.endsWith(' ') && !escape) {
+      this.insertAtCursor(' ');
     }
   }
 

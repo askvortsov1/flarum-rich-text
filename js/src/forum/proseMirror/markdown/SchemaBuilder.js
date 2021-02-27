@@ -76,7 +76,6 @@ export default class SchemaBuilder {
           },
         ],
         toDOM(node) {
-
           return ['spoiler', 0];
         },
       })
