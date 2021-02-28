@@ -57,6 +57,24 @@ export default class MarkdownSerializerBuilder {
         state.write('$$');
         state.closeBlock(node);
       },
+
+      // We still want to put a new line for empty paragraphs
+      paragraph(state, node) {
+        if (node.content.size === 0) {
+          state.write('\n');
+        } else {
+          defaultMarkdownSerializer.nodes.paragraph(state, node);
+        }
+      },
+
+      // Override this to put in just a whiteline, since Litedown doesn't like line-ending slashes.
+      hard_break(state, node, parent, index) {
+        for (let i = index + 1; i < parent.childCount; i++)
+          if (parent.child(i).type != node.type) {
+            state.write('\n');
+            return;
+          }
+      },
     };
   }
 
