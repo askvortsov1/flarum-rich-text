@@ -1,20 +1,31 @@
 import { redo, undo } from 'prosemirror-history';
 import { undoInputRule } from 'prosemirror-inputrules';
-import { chainCommands, exitCode, liftListItem, setBlockType, sinkListItem, splitListItem, toggleList, toggleMark, wrapIn } from 'tiptap-commands';
+import {
+  chainCommands,
+  exitCode,
+  liftListItem,
+  newlineInCode,
+  setBlockType,
+  sinkListItem,
+  splitListItem,
+  toggleList,
+  toggleMark,
+  wrapIn,
+} from 'tiptap-commands';
 
 export default function richTextKeymap(schema) {
-  const exitBlockCommand = chainCommands(exitCode, (state, dispatch) => {
-    dispatch(state.tr.replaceSelectionWith(schema.nodes.hard_break.create()).scrollIntoView());
-    return true;
-  });
-
-  const handleEnter = (state, dispatch) => {
+  const considerDropdown = (state, dispatch) => {
     const emojiDropdown = $('.EmojiDropdown:visible');
     const mentionsDropdown = $('.MentionsDropdown:visible');
 
     if (emojiDropdown[0] || mentionsDropdown[0]) return true;
+  };
 
-    return splitListItem(schema.nodes.list_item)(state, dispatch);
+  const handleEnter = chainCommands(considerDropdown, splitListItem(schema.nodes.list_item), exitCode);
+
+  const insertHardBreak = (state, dispatch) => {
+    dispatch(state.tr.replaceSelectionWith(schema.nodes.hard_break.create()).scrollIntoView());
+    return true;
   };
 
   return {
@@ -50,6 +61,6 @@ export default function richTextKeymap(schema) {
     'Mod-[': liftListItem(schema.nodes.list_item),
     'Mod-Shift-m': liftListItem(schema.nodes.list_item),
     Enter: handleEnter,
-    'Shift-Enter': exitBlockCommand,
+    'Shift-Enter': chainCommands(newlineInCode, insertHardBreak),
   };
 }
