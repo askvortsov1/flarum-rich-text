@@ -24,6 +24,6 @@ return [
 
     (new Extend\User())->registerPreference('useRichTextEditor', 'boolval', true),
 
-    (new Extend\Settings)
+    (new Extend\Settings())
         ->serializeToForum('toggleRichTextEditorButton', 'askvortsov-rich-text.toggle_on_editor', 'boolval', false),
 ];
