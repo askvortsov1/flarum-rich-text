@@ -1,6 +1,10 @@
 askvortsov-rich-text:
+  admin:
+    settings:
+      toggle_on_editor: Show rich text mode toggle on editor?
   forum:
     composer:
+      toggle_button: Toggle Rich Text Mode
       insert_button: Insert
       insert_image:
         src_placeholder: Link
