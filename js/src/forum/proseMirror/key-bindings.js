@@ -1,5 +1,6 @@
 import { redo, undo } from 'prosemirror-history';
 import { undoInputRule } from 'prosemirror-inputrules';
+import { TextSelection } from 'prosemirror-state';
 import {
   chainCommands,
   exitCode,
@@ -21,7 +22,22 @@ export default function richTextKeymap(schema) {
     if (emojiDropdown[0] || mentionsDropdown[0]) return true;
   };
 
-  const handleEnter = chainCommands(considerDropdown, splitListItem(schema.nodes.list_item), exitCode);
+  const smartExitCode = (state, dispatch, view) => {
+    let { $head, $anchor } = state.selection;
+    if (!$head.parent.type.spec.code || !$head.sameParent($anchor)) return false;
+
+    const nodeBefore = state.selection.$from.nodeBefore;
+    const nodeAfter = state.selection.$from.nodeAfter;
+    if ((!nodeBefore || nodeBefore.text.slice(-1) === '\n') && !nodeAfter) {
+      view.dispatch(view.state.tr.delete(state.selection.from - 1, state.selection.from));
+      view.dispatch(view.state.tr.setSelection(TextSelection.near(view.state.doc.resolve(view.state.selection.from))));
+      return exitCode(view.state, view.dispatch);
+    } else {
+      return newlineInCode(state, dispatch);
+    }
+  };
+
+  const handleEnter = chainCommands(considerDropdown, splitListItem(schema.nodes.list_item), smartExitCode);
 
   const insertHardBreak = (state, dispatch) => {
     dispatch(state.tr.replaceSelectionWith(schema.nodes.hard_break.create()).scrollIntoView());
