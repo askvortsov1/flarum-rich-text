@@ -58,3 +58,4 @@ This extension has substantial bundle size, about 350kb minified (gzipped will b
 
 - [Packagist](https://packagist.org/packages/askvortsov/flarum-rich-text)
 - [Github](https://github.com/askvortsov1/flarum-rich-text)
+- [Discuss](https://discuss.flarum.org/d/26455-wysiwyg-rich-text-editor)
