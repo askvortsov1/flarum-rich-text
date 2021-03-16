@@ -1,7 +1,7 @@
 import { toggleBlockType, toggleWrap, wrapIn } from 'tiptap-commands';
 
-import Component from 'flarum/Component';
-import ItemList from 'flarum/utils/ItemList';
+import Component from 'flarum/common/Component';
+import ItemList from 'flarum/common/utils/ItemList';
 
 import CommandButton from './CommandButton';
 import MarkButton from './MarkButton';

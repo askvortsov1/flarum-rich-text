@@ -1,5 +1,5 @@
-import Component from 'flarum/Component';
-import icon from 'flarum/helpers/icon';
+import Component from 'flarum/common/Component';
+import icon from 'flarum/common/helpers/icon';
 import extractText from 'flarum/common/utils/extractText';
 
 export default class CommandButton extends Component {

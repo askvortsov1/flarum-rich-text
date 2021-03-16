@@ -1,4 +1,4 @@
-import { extend } from 'flarum/extend';
+import { extend } from 'flarum/common/extend';
 import FieldSet from 'flarum/common/components/FieldSet';
 import Switch from 'flarum/common/components/Switch';
 import SettingsPage from 'flarum/forum/components/SettingsPage';

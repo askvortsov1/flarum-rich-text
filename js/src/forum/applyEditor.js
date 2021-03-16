@@ -1,8 +1,8 @@
-import { extend, override } from 'flarum/extend';
+import { extend, override } from 'flarum/common/extend';
 
-import Button from 'flarum/components/Button';
-import ComposerBody from 'flarum/components/ComposerBody';
-import TextEditor from 'flarum/components/TextEditor';
+import Button from 'flarum/common/components/Button';
+import ComposerBody from 'flarum/forum/components/ComposerBody';
+import TextEditor from 'flarum/common/components/TextEditor';
 
 import ProseMirrorEditorDriver from './proseMirror/ProseMirrorEditorDriver';
 import ProseMirrorMenu from './components/ProseMirrorMenu';
