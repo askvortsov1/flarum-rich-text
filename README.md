@@ -4,6 +4,8 @@
 
 A [Flarum](http://flarum.org) extension. Fully integrated Rich Text Editor for Flarum.
 
+![Screenshot](https://i.imgur.com/41pHhED.png)
+
 ### Installation
 
 Use [Bazaar](https://discuss.flarum.org/d/5151-flagrow-bazaar-the-extension-marketplace) or install manually with composer:
