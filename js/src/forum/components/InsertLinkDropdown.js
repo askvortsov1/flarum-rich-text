@@ -27,7 +27,7 @@ export default class InsertLinkDropdown extends FormDropdown {
   fields() {
     const items = super.fields();
 
-    if (this.selectionEmpty) {
+    if (this.selectionEmpty && !this.active) {
       items.add(
         'text',
         <div className="Form-group">
@@ -87,7 +87,7 @@ export default class InsertLinkDropdown extends FormDropdown {
   insert(e) {
     const linkAttrs = { href: this.href(), title: this.title() };
 
-    if (this.selectionEmpty) {
+    if (this.selectionEmpty && !this.active) {
       this.command = insertLink(this.text(), this.attrs.mark, linkAttrs);
 
       this.text('');
