@@ -37,12 +37,33 @@ export default function richTextKeymap(schema) {
     }
   };
 
-  const handleEnter = chainCommands(considerDropdown, splitListItem(schema.nodes.list_item), smartExitCode);
-
   const insertHardBreak = (state, dispatch) => {
     dispatch(state.tr.replaceSelectionWith(schema.nodes.hard_break.create()).scrollIntoView());
     return true;
   };
+
+  const smartInsertHardBreak = (state, dispatch, view) => {
+    let { $head, $anchor } = state.selection;
+    if ($head.parent.type.name !== 'paragraph' || !$head.sameParent($anchor)) return false;
+
+    const nodeBefore = state.selection.$from.nodeBefore;
+    const nodeAfter = state.selection.$from.nodeAfter;
+
+    if (nodeBefore && nodeBefore.text && nodeBefore.text.slice(-1) !== '\n') {
+      return insertHardBreak(view.state, view.dispatch);
+    } else if (nodeBefore && !nodeBefore.text && !nodeAfter) {
+      view.dispatch(view.state.tr.delete(state.selection.from - 1, state.selection.from));
+      view.dispatch(view.state.tr.setSelection(TextSelection.near(view.state.doc.resolve(view.state.selection.from))));
+    }
+  };
+
+  const enterCommands = [considerDropdown, splitListItem(schema.nodes.list_item), smartExitCode];
+
+  if (app.session.user.preferences().richTextCompactParagraphs) {
+    enterCommands.push(smartInsertHardBreak);
+  }
+
+  const handleEnter = chainCommands(...enterCommands);
 
   return {
     // History

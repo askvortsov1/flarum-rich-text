@@ -36,3 +36,4 @@ askvortsov-rich-text:
     settings:
       composer_heading: Composer
       use_rich_text_editor_label: Use rich text editor?
+      rich_text_compact_paragraphs_label: Don't separate paragraphs with newline.

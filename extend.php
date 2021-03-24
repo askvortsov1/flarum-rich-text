@@ -23,6 +23,7 @@ return [
     new Extend\Locales(__DIR__.'/resources/locale'),
 
     (new Extend\User())->registerPreference('useRichTextEditor', 'boolval', true),
+    (new Extend\User())->registerPreference('richTextCompactParagraphs', 'boolval', false),
 
     (new Extend\Settings())
         ->serializeToForum('toggleRichTextEditorButton', 'askvortsov-rich-text.toggle_on_editor', 'boolval', false),

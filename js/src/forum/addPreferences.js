@@ -40,6 +40,25 @@ export default function addPreferences() {
       )
     );
 
+    items.add(
+      'richTextCompactParagraphs',
+      Switch.component(
+        {
+          state: this.user.preferences().richTextCompactParagraphs,
+          onchange: (value) => {
+            this.richTextCompactParagraphsLoading = true;
+
+            this.user.savePreferences({ richTextCompactParagraphs: value }).then(() => {
+              this.richTextCompactParagraphsLoading = false;
+              m.redraw();
+            });
+          },
+          loading: this.richTextCompactParagraphsLoading,
+        },
+        app.translator.trans('askvortsov-rich-text.forum.settings.rich_text_compact_paragraphs_label')
+      )
+    );
+
     return items;
   };
 }
