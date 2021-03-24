@@ -1,5 +1,6 @@
 import Dropdown from 'flarum/common/components/Dropdown';
 import icon from 'flarum/common/helpers/icon';
+import SafariModalHack from './SafariModalHack';
 
 export default class HiddenItemsDropdown extends Dropdown {
   static initAttrs(attrs) {
@@ -14,6 +15,20 @@ export default class HiddenItemsDropdown extends Dropdown {
 
   oncreate(vnode) {
     super.oncreate(vnode);
+
+    this.$().on('click', (e) => {
+      if ($('.App').is('.mobile-safari')) {
+        // Mobile Safari doesn't support fixed items
+        // So, we wrap them in a modal.
+        app.modal.show(SafariModalHack, {
+          title: this.attrs.tooltip,
+          vnodeContent: this.attrs.buttons.map((button) => {
+            return button;
+          }),
+        });
+        e.stopPropagation();
+      }
+    });
 
     this.$('[data-toggle="tooltip"]').tooltip();
   }

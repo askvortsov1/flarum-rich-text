@@ -1,6 +1,7 @@
 import Dropdown from 'flarum/common/components/Dropdown';
 import extractText from 'flarum/common/utils/extractText';
 import { setBlockType } from 'tiptap-commands';
+import SafariModalHack from './SafariModalHack';
 
 export default class NodeTypeDropdown extends Dropdown {
   oninit(vnode) {
@@ -19,6 +20,18 @@ export default class NodeTypeDropdown extends Dropdown {
   oncreate(vnode) {
     super.oncreate(vnode);
 
+    this.$().on('click', (e) => {
+      if ($('.App').is('.mobile-safari')) {
+        // Mobile Safari doesn't support fixed items
+        // So, we wrap them in a modal.
+        app.modal.show(SafariModalHack, {
+          title: this.attrs.tooltip,
+          vnodeContent: this.getNodeTypeButtons(),
+        });
+        e.stopPropagation();
+      }
+    });
+
     this.onEditorUpdate();
     this.$('[data-toggle="tooltip"]').tooltip();
   }
@@ -31,25 +44,25 @@ export default class NodeTypeDropdown extends Dropdown {
     );
   }
 
+  getNodeTypeButtons() {
+    return this.attrs.options
+      .filter((_, i) => i !== this.activeIndex)
+      .map((option) => (
+        <button
+          className="Button Button--icon Button--link NodeTypeButton"
+          key={option.title}
+          title={extractText(option.tooltip)}
+          oncreate={(vnode) => $(vnode.dom).tooltip()}
+          onclick={this.click.bind(this, option.type, option.attrs)}
+          onkeydown={this.keydown.bind(this, option.type, option.attrs)}
+        >
+          {option.title}
+        </button>
+      ));
+  }
+
   getMenu(items) {
-    return (
-      <ul className={'Dropdown-menu dropdown-menu NodeTypeDropdownMenu'}>
-        {this.attrs.options
-          .filter((_, i) => i !== this.activeIndex)
-          .map((option) => (
-            <button
-              className="Button Button--icon Button--link NodeTypeButton"
-              key={option.title}
-              title={extractText(option.tooltip)}
-              oncreate={(vnode) => $(vnode.dom).tooltip()}
-              onclick={this.click.bind(this, option.type, option.attrs)}
-              onkeydown={this.keydown.bind(this, option.type, option.attrs)}
-            >
-              {option.title}
-            </button>
-          ))}
-      </ul>
-    );
+    return <ul className={'Dropdown-menu dropdown-menu NodeTypeDropdownMenu'}>{this.getNodeTypeButtons()}</ul>;
   }
 
   keydown(type, attrs, e) {
@@ -59,6 +72,8 @@ export default class NodeTypeDropdown extends Dropdown {
   }
 
   click(type, attrs, e) {
+    // Here for the safari workaround
+    app.modal.close();
     e.preventDefault();
     this.command = setBlockType(type, attrs);
     return this.state.run(this.attrs.type);

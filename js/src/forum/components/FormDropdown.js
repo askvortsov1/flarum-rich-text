@@ -2,6 +2,7 @@ import Button from 'flarum/common/components/Button';
 import Dropdown from 'flarum/common/components/Dropdown';
 import icon from 'flarum/common/helpers/icon';
 import ItemList from 'flarum/common/utils/ItemList';
+import SafariModalHack from './SafariModalHack';
 
 export default class FormDropdown extends Dropdown {
   static initAttrs(attrs) {
@@ -16,6 +17,19 @@ export default class FormDropdown extends Dropdown {
 
   oncreate(vnode) {
     super.oncreate(vnode);
+
+    this.$().on('click', (e) => {
+      if ($('.App').is('.mobile-safari')) {
+        // Mobile Safari doesn't support fixed items
+        // So, we wrap them in a modal.
+        app.modal.show(SafariModalHack, {
+          title: this.attrs.tooltip,
+          vnodeContent: this.fields().toArray(),
+          onsubmit: this.onsubmit.bind(this),
+        });
+        e.stopPropagation();
+      }
+    });
 
     this.$().on('shown.bs.dropdown', () => {
       this.$('.Dropdown-menu').find('input, select, textarea').first().focus().select();
@@ -55,6 +69,8 @@ export default class FormDropdown extends Dropdown {
   }
 
   onsubmit(e) {
+    // Here for the safari workaround
+    app.modal.close();
     e.preventDefault();
     $('body').trigger('click');
     this.insert(e);
