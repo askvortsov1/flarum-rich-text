@@ -22,6 +22,8 @@ export default class InsertLinkDropdown extends FormDropdown {
       },
       this.onEditorUpdate.bind(this)
     );
+
+    this.selectionEmpty = true;
   }
 
   fields() {
