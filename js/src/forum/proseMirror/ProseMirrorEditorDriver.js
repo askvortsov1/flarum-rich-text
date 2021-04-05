@@ -179,16 +179,16 @@ export default class ProseMirrorEditorDriver {
    * @param rawMarkdown
    */
   insertBetween(start, end, text, escape = true) {
-    let transaction;
+    let trailingNewLines;
 
     if (escape) {
-      transaction = this.view.state.tr.insertText(text, start, end);
+      this.view.dispatch(this.view.state.tr.insertText(text, start, end));
     } else {
       start -= 1;
-      transaction = this.view.state.tr.replaceRangeWith(start, end, this.parseInitialValue(text));
-    }
+      this.view.dispatch(this.view.state.tr.replaceRangeWith(start, end, this.parseInitialValue(text)));
 
-    this.view.dispatch(transaction);
+      trailingNewLines = text.match(/\s+$/)[0].split('\n').length - 1;
+    }
 
     // Move the textarea cursor to the end of the content we just inserted.
     this.moveCursorTo(Math.min(start + text.length, Selection.atEnd(this.view.state.doc).to));
@@ -198,6 +198,12 @@ export default class ProseMirrorEditorDriver {
     if (text.endsWith(' ') && !escape) {
       this.insertAtCursor(' ');
     }
+
+    Array(trailingNewLines)
+      .fill(0)
+      .forEach(() => {
+        baseKeymap['Enter'](this.view.state, this.view.dispatch);
+      });
   }
 
   /**
