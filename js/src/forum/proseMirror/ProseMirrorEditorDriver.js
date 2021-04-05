@@ -8,6 +8,7 @@ import { gapCursor } from 'prosemirror-gapcursor';
 
 import ItemList from 'flarum/common/utils/ItemList';
 import disabledPlugin from './plugins/disabledPlugin';
+import disableBase64PastePlugin from './plugins/disableBase64PastePlugin';
 import placeholderPlugin from './plugins/placeholderPlugin';
 import menuPlugin from './plugins/menuPlugin';
 import toggleSpoiler from './plugins/toggleSpoiler';
@@ -76,6 +77,8 @@ export default class ProseMirrorEditorDriver {
     items.add('history', history());
 
     items.add('disabled', disabledPlugin());
+
+    items.add('disableBase64Paste', disableBase64PastePlugin());
 
     items.add('dropCursor', dropCursor());
 
