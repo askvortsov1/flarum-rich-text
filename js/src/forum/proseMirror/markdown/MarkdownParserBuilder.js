@@ -38,6 +38,9 @@ export default class MarkdownParserBuilder {
         mark: 'strike',
       },
 
+      // Litedown treaks softbreaks as hard breaks
+      softbreak: { node: 'hard_break' },
+
       spoiler: {
         block: 'spoiler',
       },
