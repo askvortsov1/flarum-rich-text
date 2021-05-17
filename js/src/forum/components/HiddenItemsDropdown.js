@@ -1,4 +1,5 @@
 import Dropdown from 'flarum/common/components/Dropdown';
+import Tooltip from 'flarum/common/components/Tooltip';
 import icon from 'flarum/common/helpers/icon';
 import SafariModalHack from './SafariModalHack';
 
@@ -29,15 +30,13 @@ export default class HiddenItemsDropdown extends Dropdown {
         e.stopPropagation();
       }
     });
-
-    this.$('[data-toggle="tooltip"]').tooltip();
   }
 
   getButtonContent(children) {
     return (
-      <span data-toggle="tooltip" title={this.attrs.tooltip}>
-        {icon(this.attrs.icon)}
-      </span>
+      <Tooltip text={this.attrs.tooltip}>
+        <span>{icon(this.attrs.icon)}</span>
+      </Tooltip>
     );
   }
 

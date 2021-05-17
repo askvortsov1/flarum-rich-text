@@ -1,4 +1,5 @@
 import Component from 'flarum/common/Component';
+import Tooltip from 'flarum/common/components/Tooltip';
 import icon from 'flarum/common/helpers/icon';
 import extractText from 'flarum/common/utils/extractText';
 
@@ -10,22 +11,13 @@ export default class CommandButton extends Component {
     this.state.addItem(this.attrs.type, this.attrs.command, this.onEditorUpdate.bind(this));
   }
 
-  oncreate(vnode) {
-    super.oncreate(vnode);
-
-    this.$().tooltip();
-  }
-
   view() {
     return (
-      <button
-        className="Button Button--icon Button--link CommandButton"
-        title={extractText(this.attrs.tooltip)}
-        onclick={this.click.bind(this)}
-        onkeydown={this.keydown.bind(this)}
-      >
-        {icon(this.attrs.icon)}
-      </button>
+      <Tooltip text={extractText(this.attrs.tooltip)}>
+        <button className="Button Button--icon Button--link CommandButton" onclick={this.click.bind(this)} onkeydown={this.keydown.bind(this)}>
+          {icon(this.attrs.icon)}
+        </button>
+      </Tooltip>
     );
   }
 

@@ -3,6 +3,8 @@ import { extend, override } from 'flarum/common/extend';
 import Button from 'flarum/common/components/Button';
 import ComposerBody from 'flarum/forum/components/ComposerBody';
 import TextEditor from 'flarum/common/components/TextEditor';
+import Tooltip from 'flarum/common/components/Tooltip';
+import classList from 'flarum/common/utils/classList';
 
 import ProseMirrorEditorDriver from './proseMirror/ProseMirrorEditorDriver';
 import ProseMirrorMenu from './components/ProseMirrorMenu';
@@ -20,23 +22,23 @@ export default function applyEditor() {
   extend(TextEditor.prototype, 'controlItems', function (items) {
     if (!app.forum.attribute('toggleRichTextEditorButton')) return;
 
-    const buttonClasses = ['Button', 'Button--icon'];
-    if (app.session.user.preferences().useRichTextEditor) buttonClasses.push('active');
+    const buttonOnClick = () => {
+      app.session.user.savePreferences({ useRichTextEditor: !app.session.user.preferences().useRichTextEditor }).then(() => {
+        textEditorKey++;
+        m.redraw.sync();
+        app.composer.editor.focus();
+      });
+    };
+
     items.add(
       'rich-text',
-      Button.component({
-        icon: 'fas fa-pen-fancy',
-        className: buttonClasses.join(' '),
-        onclick: () => {
-          app.session.user.savePreferences({ useRichTextEditor: !app.session.user.preferences().useRichTextEditor }).then(() => {
-            textEditorKey++;
-            m.redraw.sync();
-            app.composer.editor.focus();
-          });
-        },
-        title: app.translator.trans('core.forum.composer.preview_tooltip'),
-        oncreate: (vnode) => $(vnode.dom).tooltip(),
-      }),
+      <Tooltip text={app.translator.trans('core.forum.composer.preview_tooltip')}>
+        <Button
+          icon="fas fa-pen-fancy"
+          className={classList({ Button: true, 'Button--icon': true, active: app.session.user.preferences().useRichTextEditor })}
+          onclick={buttonOnClick}
+        ></Button>
+      </Tooltip>,
       -10
     );
   });

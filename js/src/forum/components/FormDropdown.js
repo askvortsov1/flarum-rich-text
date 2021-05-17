@@ -1,5 +1,6 @@
 import Button from 'flarum/common/components/Button';
 import Dropdown from 'flarum/common/components/Dropdown';
+import Tooltip from 'flarum/common/components/Tooltip';
 import icon from 'flarum/common/helpers/icon';
 import ItemList from 'flarum/common/utils/ItemList';
 import SafariModalHack from './SafariModalHack';
@@ -34,14 +35,13 @@ export default class FormDropdown extends Dropdown {
     this.$().on('shown.bs.dropdown', () => {
       this.$('.Dropdown-menu').find('input, select, textarea').first().focus().select();
     });
-    this.$('[data-toggle="tooltip"]').tooltip();
   }
 
   getButtonContent(children) {
     return (
-      <span data-toggle="tooltip" title={this.attrs.tooltip}>
-        {icon(this.attrs.icon)}
-      </span>
+      <Tooltip text={this.attrs.tooltip}>
+        <span>{icon(this.attrs.icon)}</span>
+      </Tooltip>
     );
   }
 

@@ -1,4 +1,5 @@
 import Dropdown from 'flarum/common/components/Dropdown';
+import Tooltip from 'flarum/common/components/Tooltip';
 import extractText from 'flarum/common/utils/extractText';
 import { setBlockType } from 'tiptap-commands';
 import SafariModalHack from './SafariModalHack';
@@ -33,13 +34,14 @@ export default class NodeTypeDropdown extends Dropdown {
     });
 
     this.onEditorUpdate();
-    this.$('[data-toggle="tooltip"]').tooltip();
   }
 
   getButton(children) {
     return (
       <button className="Dropdown-toggle Button Button--icon Button--link NodeTypeButton Button--menuDropdown" data-toggle="dropdown">
-        <span data-toggle="tooltip" title={this.attrs.tooltip}></span>
+        <Tooltip text={this.attrs.tooltip}>
+          <span></span>
+        </Tooltip>
       </button>
     );
   }
@@ -48,16 +50,15 @@ export default class NodeTypeDropdown extends Dropdown {
     return this.attrs.options
       .filter((_, i) => i !== this.activeIndex)
       .map((option) => (
-        <button
-          className="Button Button--icon Button--link NodeTypeButton"
-          key={option.title}
-          title={extractText(option.tooltip)}
-          oncreate={(vnode) => $(vnode.dom).tooltip()}
-          onclick={this.click.bind(this, option.type, option.attrs)}
-          onkeydown={this.keydown.bind(this, option.type, option.attrs)}
-        >
-          {option.title}
-        </button>
+        <Tooltip text={extractText(option.tooltip)} key={option.title}>
+          <button
+            className="Button Button--icon Button--link NodeTypeButton"
+            onclick={this.click.bind(this, option.type, option.attrs)}
+            onkeydown={this.keydown.bind(this, option.type, option.attrs)}
+          >
+            {option.title}
+          </button>
+        </Tooltip>
       ));
   }
 
