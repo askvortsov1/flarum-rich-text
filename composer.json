@@ -12,8 +12,8 @@
     "forum": "https://discuss.flarum.org/d/26455-wysiwyg-rich-text-editor"
   },
   "require": {
-    "flarum/core": "^0.1.0-beta.16",
-    "flarum/markdown": "^0.1.0-beta.16"
+    "flarum/core": "^1.0.0",
+    "flarum/markdown": "^1.0.0"
   },
   "authors": [
     {
