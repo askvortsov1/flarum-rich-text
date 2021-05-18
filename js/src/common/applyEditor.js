@@ -1,7 +1,6 @@
 import { extend, override } from 'flarum/common/extend';
 
 import Button from 'flarum/common/components/Button';
-import ComposerBody from 'flarum/forum/components/ComposerBody';
 import TextEditor from 'flarum/common/components/TextEditor';
 import Tooltip from 'flarum/common/components/Tooltip';
 import classList from 'flarum/common/utils/classList';
@@ -10,21 +9,14 @@ import ProseMirrorEditorDriver from './proseMirror/ProseMirrorEditorDriver';
 import ProseMirrorMenu from './components/ProseMirrorMenu';
 import MenuState from './states/MenuState';
 
-let textEditorKey = 0;
-
 export default function applyEditor() {
-  extend(ComposerBody.prototype, 'view', function (vdom) {
-    const editorVnode = vdom.children[0].children[1].children[1].children[0];
-    editorVnode.attrs.key = textEditorKey;
-    editorVnode.key = textEditorKey;
-  });
-
   extend(TextEditor.prototype, 'controlItems', function (items) {
     if (!app.forum.attribute('toggleRichTextEditorButton')) return;
 
     const buttonOnClick = () => {
       app.session.user.savePreferences({ useRichTextEditor: !app.session.user.preferences().useRichTextEditor }).then(() => {
-        textEditorKey++;
+        app.composer.editor.destroy();
+        this.attrs.composer.editor = this.buildEditor(this.$('.TextEditor-editorContainer')[0]);
         m.redraw.sync();
         app.composer.editor.focus();
       });
