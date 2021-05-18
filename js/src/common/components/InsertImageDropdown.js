@@ -20,7 +20,7 @@ export default class InsertImageDropdown extends FormDropdown {
           className="FormControl"
           name="src"
           type="url"
-          placeholder={extractText(app.translator.trans('askvortsov-rich-text.forum.composer.insert_image.src_placeholder'))}
+          placeholder={extractText(app.translator.trans('askvortsov-rich-text.lib.composer.insert_image.src_placeholder'))}
           bidi={this.src}
           required
         />
@@ -34,7 +34,7 @@ export default class InsertImageDropdown extends FormDropdown {
         <input
           className="FormControl"
           name="title"
-          placeholder={extractText(app.translator.trans('askvortsov-rich-text.forum.composer.insert_image.title_placeholder'))}
+          placeholder={extractText(app.translator.trans('askvortsov-rich-text.lib.composer.insert_image.title_placeholder'))}
           bidi={this.title}
         />
       </div>,

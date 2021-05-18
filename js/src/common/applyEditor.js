@@ -24,7 +24,7 @@ export default function applyEditor() {
 
     items.add(
       'rich-text',
-      <Tooltip text={app.translator.trans('core.forum.composer.preview_tooltip')}>
+      <Tooltip text={app.translator.trans('core.lib.composer.preview_tooltip')}>
         <Button
           icon="fas fa-pen-fancy"
           className={classList({ Button: true, 'Button--icon': true, active: app.session.user.preferences().useRichTextEditor })}

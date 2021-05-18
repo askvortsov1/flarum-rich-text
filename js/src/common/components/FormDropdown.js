@@ -61,7 +61,7 @@ export default class FormDropdown extends Dropdown {
     items.add(
       'insert',
       <Button type="submit" className="Button Button--primary">
-        {app.translator.trans('askvortsov-rich-text.forum.composer.insert_button')}
+        {app.translator.trans('askvortsov-rich-text.lib.composer.insert_button')}
       </Button>
     );
 

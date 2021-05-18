@@ -33,7 +33,7 @@ export default class CommandButton extends Component {
   }
 
   title() {
-    let tooltip = app.translator.trans(`askvortsov-rich-text.forum.composer.${this.attrs.type}_tooltip`);
+    let tooltip = app.translator.trans(`askvortsov-rich-text.lib.composer.${this.attrs.type}_tooltip`);
 
     return tooltip;
   }

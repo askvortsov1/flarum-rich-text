@@ -36,7 +36,7 @@ export default class InsertLinkDropdown extends FormDropdown {
           <input
             className="FormControl"
             name="text"
-            placeholder={extractText(app.translator.trans('askvortsov-rich-text.forum.composer.insert_link.text_placeholder'))}
+            placeholder={extractText(app.translator.trans('askvortsov-rich-text.lib.composer.insert_link.text_placeholder'))}
             bidi={this.text}
             required
           />
@@ -52,7 +52,7 @@ export default class InsertLinkDropdown extends FormDropdown {
           className="FormControl"
           name="href"
           type="url"
-          placeholder={extractText(app.translator.trans('askvortsov-rich-text.forum.composer.insert_link.href_placeholder'))}
+          placeholder={extractText(app.translator.trans('askvortsov-rich-text.lib.composer.insert_link.href_placeholder'))}
           bidi={this.href}
           required
         />
@@ -66,7 +66,7 @@ export default class InsertLinkDropdown extends FormDropdown {
         <input
           className="FormControl"
           name="title"
-          placeholder={extractText(app.translator.trans('askvortsov-rich-text.forum.composer.insert_link.title_placeholder'))}
+          placeholder={extractText(app.translator.trans('askvortsov-rich-text.lib.composer.insert_link.title_placeholder'))}
           bidi={this.title}
         />
       </div>,
@@ -77,7 +77,7 @@ export default class InsertLinkDropdown extends FormDropdown {
       items.add(
         'remove',
         <Button onclick={this.remove.bind(this)} className="Button Button--danger">
-          {app.translator.trans('askvortsov-rich-text.forum.composer.insert_link.remove_button')}
+          {app.translator.trans('askvortsov-rich-text.lib.composer.insert_link.remove_button')}
         </Button>,
         -10
       );

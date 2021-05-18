@@ -2,7 +2,7 @@ askvortsov-rich-text:
   admin:
     settings:
       toggle_on_editor: Show rich text mode toggle on editor?
-  forum:
+  lib:
     composer:
       toggle_button: Toggle Rich Text Mode
       insert_button: Insert
@@ -33,6 +33,8 @@ askvortsov-rich-text:
       sup_tooltip: Superscript <{modifierKey}-.>
       text_type_tooltip: Select Text Type
       unordered_list_tooltip: Bulleted list <shift-{modifierKey}-8>
+
+  forum:
     settings:
       composer_heading: Composer
       use_rich_text_editor_label: Use rich text editor?
