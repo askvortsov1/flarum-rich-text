@@ -24,12 +24,12 @@ export default function applyEditor() {
 
     items.add(
       'rich-text',
-      <Tooltip text={app.translator.trans('core.lib.composer.preview_tooltip')}>
+      <Tooltip text={app.translator.trans('askvortsov-rich-text.lib.composer.toggle_button')}>
         <Button
           icon="fas fa-pen-fancy"
           className={classList({ Button: true, 'Button--icon': true, active: app.session.user.preferences().useRichTextEditor })}
           onclick={buttonOnClick}
-        ></Button>
+        />
       </Tooltip>,
       -10
     );
@@ -40,7 +40,7 @@ export default function applyEditor() {
 
     items.remove('markdown');
 
-    items.add('prosemirror-menu', <ProseMirrorMenu state={this.menuState}></ProseMirrorMenu>, 100);
+    items.add('prosemirror-menu', <ProseMirrorMenu state={this.menuState} />, 100);
   });
 
   extend(TextEditor.prototype, 'buildEditorParams', function (items) {

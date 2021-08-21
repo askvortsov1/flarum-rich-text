@@ -182,7 +182,7 @@ export default class ProseMirrorEditorDriver {
    * @param rawMarkdown
    */
   insertBetween(start, end, text, escape = true) {
-    let trailingNewLines;
+    let trailingNewLines = 0;
 
     if (escape) {
       this.view.dispatch(this.view.state.tr.insertText(text, start, end));
