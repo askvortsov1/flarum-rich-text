@@ -49,6 +49,7 @@ export default function applyEditor() {
     items.menuState = this.menuState = new MenuState();
     items.classNames.push('Post-body');
     items.escape = () => app.composer.close();
+    m.redraw();
   });
 
   override(TextEditor.prototype, 'buildEditor', function (original, dom) {
