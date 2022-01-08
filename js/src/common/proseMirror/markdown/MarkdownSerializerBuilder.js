@@ -33,7 +33,7 @@ function genMarkupAwareMarkConfig(config) {
 
 MarkdownSerializerState.prototype.esc = function (str, startOfLine) {
   str = str.replace(/[`*\\~]/g, '\\$&');
-  if (startOfLine) str = str.replace(/^[:#\-*+]/, '\\$&').replace(/^(\s*\d+)\./, '$1\\.');
+  if (startOfLine) str = str.replace(/^[#\-*+]/, '\\$&').replace(/^(\s*\d+)\./, '$1\\.');
   return str;
 };
 
