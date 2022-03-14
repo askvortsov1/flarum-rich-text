@@ -187,14 +187,19 @@ export default class ProseMirrorEditorDriver {
     if (escape) {
       this.view.dispatch(this.view.state.tr.insertText(text, start, end));
     } else {
-      start -= 1;
-      this.view.dispatch(this.view.state.tr.replaceRangeWith(start, end, this.parseInitialValue(text)));
+      // Without this, a newline would be added before the inserted text.
+      const OFFSET_TO_REMOVE_PREFIX_NEWLINE = 1;
+      start -= OFFSET_TO_REMOVE_PREFIX_NEWLINE;
+      const parsedText = this.parseInitialValue(text);
+      this.view.dispatch(this.view.state.tr.replaceRangeWith(start, end, parsedText));
 
       trailingNewLines = text.match(/\s+$/)[0].split('\n').length - 1;
     }
 
     // Move the textarea cursor to the end of the content we just inserted.
-    this.moveCursorTo(Math.min(start + text.length, Selection.atEnd(this.view.state.doc).to));
+    // The offset is necessary so the new cursor position doesn't split the inserted text
+    // when the space is added below.
+    this.moveCursorTo(Math.min(start + text.length + OFFSET_TO_REMOVE_PREFIX_NEWLINE, Selection.atEnd(this.view.state.doc).to));
     m.redraw();
 
     // TODO: accomplish this in one step.
