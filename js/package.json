@@ -1,40 +1,43 @@
 {
-  "name": "@askvortsov/flarum-rich-text",
-  "version": "0.0.0",
-  "private": true,
-  "dependencies": {
-    "flarum-webpack-config": "^0.1.0-beta.10",
-    "markdown-it": "^10.0.0",
-    "markdown-it-latex2img": "0.0.6",
-    "markdown-it-sub": "^1.0.0",
-    "markdown-it-sup": "^1.0.0",
-    "prosemirror-dropcursor": "^1.0.0",
-    "prosemirror-gapcursor": "^1.0.0",
-    "prosemirror-history": "^1.0.0",
-    "prosemirror-inputrules": "^1.0.0",
-    "prosemirror-keymap": "^1.0.0",
-    "prosemirror-markdown": "^1.0.0",
-    "prosemirror-model": "^1.0.0",
-    "prosemirror-state": "^1.0.0",
-    "prosemirror-view": "^1.0.0",
-    "tiptap-commands": "^1.0.0",
-    "tiptap-utils": "^1.0.0",
-    "webpack": "^4.26.0",
-    "webpack-cli": "^3.0.7"
-  },
-  "devDependencies": {
-    "husky": "^4.2.5",
-    "prettier": "2.0.2"
-  },
-  "scripts": {
-    "dev": "webpack --mode development --watch",
-    "build": "webpack --mode production",
-    "format": "prettier --write src",
-    "format-check": "prettier --check src"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run format"
-    }
-  }
+    "name": "@askvortsov/flarum-rich-text",
+    "version": "0.0.0",
+    "private": true,
+    "dependencies": {
+        "markdown-it": "^10.0.0",
+        "markdown-it-latex2img": "0.0.6",
+        "markdown-it-sub": "^1.0.0",
+        "markdown-it-sup": "^1.0.0",
+        "prosemirror-dropcursor": "^1.0.0",
+        "prosemirror-gapcursor": "^1.0.0",
+        "prosemirror-history": "^1.0.0",
+        "prosemirror-inputrules": "^1.0.0",
+        "prosemirror-keymap": "^1.0.0",
+        "prosemirror-markdown": "^1.0.0",
+        "prosemirror-model": "^1.0.0",
+        "prosemirror-state": "^1.0.0",
+        "prosemirror-view": "^1.0.0",
+        "tiptap-commands": "^1.0.0",
+        "tiptap-utils": "^1.0.0"
+    },
+    "devDependencies": {
+        "husky": "^4.2.5",
+        "prettier": "^2.5.1",
+        "flarum-webpack-config": "^2.0.0",
+        "webpack": "^5.65.0",
+        "webpack-cli": "^4.9.1",
+        "@flarum/prettier-config": "^1.0.0"
+    },
+    "scripts": {
+        "dev": "webpack --mode development --watch",
+        "build": "webpack --mode production",
+        "format": "prettier --write src",
+        "format-check": "prettier --check src",
+        "analyze": "cross-env ANALYZER=true yarn run build"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run format"
+        }
+    },
+    "prettier": "@flarum/prettier-config"
 }
