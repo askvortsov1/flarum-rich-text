@@ -184,11 +184,12 @@ export default class ProseMirrorEditorDriver {
   insertBetween(start, end, text, escape = true) {
     let trailingNewLines = 0;
 
+    const OFFSET_TO_REMOVE_PREFIX_NEWLINE = 1;
+
     if (escape) {
       this.view.dispatch(this.view.state.tr.insertText(text, start, end));
     } else {
       // Without this, a newline would be added before the inserted text.
-      const OFFSET_TO_REMOVE_PREFIX_NEWLINE = 1;
       start -= OFFSET_TO_REMOVE_PREFIX_NEWLINE;
       const parsedText = this.parseInitialValue(text);
       this.view.dispatch(this.view.state.tr.replaceRangeWith(start, end, parsedText));
