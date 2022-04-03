@@ -39,7 +39,7 @@ export default class NodeTypeDropdown extends Dropdown {
   getButton(children) {
     return (
       <button className="Dropdown-toggle Button Button--icon Button--link NodeTypeButton Button--menuDropdown" data-toggle="dropdown">
-        <Tooltip text={this.attrs.tooltip}>
+        <Tooltip key={this.attrs.tooltip} text={this.attrs.tooltip}>
           <span></span>
         </Tooltip>
       </button>
