@@ -1,0 +1,41 @@
+askvortsov-rich-text:
+  admin:
+    settings:
+      toggle_on_editor: Показать переключатель режима Rich Text в редакторе?
+  lib:
+    composer:
+      toggle_button: Переключить режим Rich Text
+      insert_button: Вставить
+      insert_image:
+        src_placeholder: Ссылка
+        title_placeholder: Заголовок
+      insert_link:
+        text_placeholder: Текст
+        href_placeholder: URL
+        title_placeholder: Заголовок (показывается при наведении)
+        remove_button: Удалить
+      additional_items_tooltip: Дополнительные элементы управления
+      bold_tooltip: Жирный текст <{modifierKey}-b>
+      code_tooltip: Встроенный код <{modifierKey}-`>
+      code_block_tooltip: Вставить блок кода
+      header_tooltip: Изменить на заголовок {level} <shift-{modifierKey}-{level}>
+      horizontal_rule_tooltip: Вставить горизонтальную линию
+      image_tooltip: Добавить изображение
+      italic_tooltip: Курсивный текст <{modifierKey}-i>
+      link_tooltip: Добавить ссылку
+      ordered_list_tooltip: Нумерованный список <shift-{modifierKey}-9>
+      paragraph_tooltip: Изменить на параграф <shift-{modifierKey}-0>
+      quote_tooltip: Вставить цитату <{modifierKey}-q>
+      spoiler_block_tooltip: Блок спойлера/выпадающий блок
+      spoiler_inline_tooltip: Спойлер <{modifierKey}-;>
+      strike_tooltip: Зачеркнутый <alt-shift-5>
+      sub_tooltip: Подстрочный <{modifierKey}-,>
+      sup_tooltip: Надстрочный <{modifierKey}-.>
+      text_type_tooltip: Выбрать тип текста
+      unordered_list_tooltip: Маркированный список <shift-{modifierKey}-8>
+
+  forum:
+    settings:
+      composer_heading: Редактор
+      use_rich_text_editor_label: Использовать редактор Rich Text?
+      rich_text_compact_paragraphs_label: Не разделять абзацы новой строкой.
